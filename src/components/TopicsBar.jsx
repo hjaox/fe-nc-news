@@ -27,7 +27,8 @@ export default function TopicsBar() {
     }
 
     function handleTopic(topic) {
-            nav(`/articles/${topic}`)
+        setSelectedTopic(topic)
+        nav(`/articles/${topic}`)
     }
 
 
