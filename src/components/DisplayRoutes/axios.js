@@ -23,3 +23,10 @@ export function getAllArticles() {
         console.log(err)
     })
 }
+
+export function getCommentsByArticleID(article_id) {
+    return instance.get(`/api/articles/${article_id}/comments`).
+    then(({data: {comments}}) => {
+        return comments
+    })
+}
