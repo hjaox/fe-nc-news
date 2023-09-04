@@ -59,7 +59,7 @@
   }
 
   /*----------------- displayRouter-allItems -------------------*/
-  .displayAllItems {
+  .displayAllArticles {
     width: 100%;
     gap: 20px;
     display: flex;
@@ -114,12 +114,12 @@
   border: solid;
 }
 
-.displayAllItems {
+.displayAllArticles {
   border:solid;
   border-color: green;
 }
 
-.displayAllItems .article {
+.displayAllArticles .article {
   border: solid;
   border-color: blue;
 }
@@ -129,7 +129,7 @@ body {
   border-color: red;
 }
 
-.displayAllItems {
+.displayAllArticles {
   border:solid;
   border-color: green;
 }
