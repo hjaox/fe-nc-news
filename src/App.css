@@ -13,7 +13,7 @@
   #root {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
     align-items: center;
   }
 
@@ -58,7 +58,7 @@
     grid-area: displayrouter;
   }
 
-  /*----------------- displayRouter-allItems -------------------*/
+  /*----------------- displayRouter-allArticles -------------------*/
   .displayAllArticles {
     width: 100%;
     gap: 20px;
@@ -66,7 +66,7 @@
     flex-direction: column;
   }
 
-  .article {
+  .displayAllArticles .article {
     padding: 5%;
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
@@ -78,27 +78,101 @@
     gap: 10px;
   }
 
-  .articleTitle {
+  .displayAllArticles .articleTitle {
     grid-area: articleTitle;
   }
 
-  .articleImg {
+  .displayAllArticles .articleImg {
     grid-area: articleImg;
     width: 100%;
     height: 100%;
     padding: 5%;
   }
 
-  .articleAuthor {
+  .displayAllArticles .articleAuthor {
     grid-area: articleAuthor
   }
 
-  .articleVotes {
+  .displayAllArticles .articleVotes {
     grid-area: articleVotes;
   }
 
-  .articleCommentCount {
+  .displayAllArticles .articleCommentCount {
     grid-area: articleCommentCount
+  }
+  /*----------------- displayRouter-singleArticle -------------------*/
+
+  .displaySingleArticle {
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .displaySingleArticle .article {
+    padding: 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: 2fr 1fr 4fr 1fr;
+    grid-template-areas:
+    'articleTitle articleTitle articleImg'
+    'articleAuthor articleAuthor articleImg'
+    'articleBody articleBody articleImg'
+    'articleVotes articleCommentCount articleImg';
+    gap: 10px;
+  }
+
+  .displaySingleArticle .articleTitle {
+    grid-area: articleTitle;
+  }
+
+  .displaySingleArticle .articleImg {
+    grid-area: articleImg;
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+  }
+
+  .displaySingleArticle .articleAuthor {
+    grid-area: articleAuthor
+  }
+
+  .displaySingleArticle .articleVotes {
+    grid-area: articleVotes;
+  }
+
+  .displaySingleArticle .articleCommentCount {
+    grid-area: articleCommentCount
+  }
+
+  .displaySingleArticle .articleBody {
+    grid-area: articleBody
+  }
+
+  .comment {
+    display: grid;
+    grid-template-areas:
+    'commentAuthor commentCreatedAt'
+    'commentBody commentBody'
+    'commentVotes commentVotes';
+    gap: 10px;
+  }
+
+  .comment .commentAuthor {
+    grid-area: commentAuthor;
+  }
+  
+  .comment .commentCreatedAt {
+    grid-area: commentCreatedAt;
+    justify-self: right;
+  }
+  
+  .comment .commentBody {
+    grid-area: commentBody;
+  }
+  
+  .comment .commentVotes {
+    grid-area: commentVotes;
   }
 
   /*----------------- settings -------------------*/
@@ -154,3 +228,30 @@ body {
 .settings {
   border: solid;
 }
+
+/* .comment {
+  border: solid;
+  border-color: blue;
+}
+
+.comment .commentAuthor {
+  border: solid;
+}
+
+.comment .commentCreatedAt {
+  border: solid;
+}
+
+.comment .commentBody {
+  border: solid;
+}
+
+.comment .commentVotes {
+  border: solid;
+} */
+
+/* .displaySingleArticle .article {
+  border: solid;
+  width: 100%;
+  height: 100%;
+} */
