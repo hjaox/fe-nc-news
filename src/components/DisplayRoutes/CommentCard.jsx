@@ -1,6 +1,6 @@
-export default function CommentsCard(comment) {
+export default function CommentCard({comment}) {
     return (
-        <div key={comment.comment_id} className="comment">
+        <>
             <h4 className="commentAuthor">
                 By: {comment.author}
             </h4>
@@ -13,6 +13,6 @@ export default function CommentsCard(comment) {
             <span className="commentVotes">
                 {comment.votes}
             </span>
-        </div>
+        </>
     )
 }

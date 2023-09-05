@@ -30,3 +30,15 @@ export function getCommentsByArticleID(article_id) {
         return comments
     })
 }
+
+export function patchArticleByVote(article, upvote) {
+    const {article_id} = article;
+    const updatedData = upvote ? {inc_votes: 1} : {inc_votes: -1};
+    console.log(article.votes, 'axios')
+    return instance.patch(`/api/articles/${article_id}`, updatedData)
+    .then(({data}) => {
+        console.log('here')
+        console.log(data)
+    })
+    
+}
