@@ -109,6 +109,15 @@
     flex-direction: column;
   }
 
+  .displaySingleArticle .commentForm {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .displaySingleArticle .commentForm .commentFormBody{
+    min-height: 3rem;
+  }
+
   .displaySingleArticle .article {
     padding: 5%;
     display: grid;
@@ -121,6 +130,8 @@
     'articleVotes articleVotes articleCommentCount';
     gap: 10px;
   }
+
+  
 
   .displaySingleArticle .comment {
     display: grid;
@@ -161,10 +172,36 @@
     margin: 2rem 0px;
   }
 
+  .displaySingleArticle .articleVotes {
+    display: grid;
+    grid-template-areas:
+    'upVoteBtn voteCount downVoteBtn';
+    grid-column: 1fr 1fr 1fr;
+  }
+
+  .displaySingleArticle .articleCommentCount {
+    margin: auto;
+  }
+
+
+  .displaySingleArticle .upVoteBtn {
+    grid-area: upVoteBtn;
+  }
+
+  .displaySingleArticle .downVoteBtn {
+    grid-area: downVoteBtn;
+  }
+
+  .displaySingleArticle .voteCount {
+    grid-area: voteCount;
+    margin: auto;
+  }
+
   .displaySingleArticle button.active {
     background-color: red
   };
 
+  
   
   .displaySingleArticle .comment .commentAuthor {
     grid-area: commentAuthor;
@@ -187,6 +224,33 @@
   .settings {
     grid-area: settings;
   }
+
+  .users-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+  }
+
+  .dropdown .users-dropdown-menu {
+    visibility: hidden;
+  }
+
+  .show .users-dropdown-menu {
+    visibility: visible;
+  }
+  /* .topics-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+  }
+
+  .dropdown .topics-dropdown-menu {
+    visibility: hidden;
+  }
+
+  .show .topics-dropdown-menu {
+    visibility: visible;
+  } */
 } 
 /* end of media screen */
 
@@ -236,6 +300,10 @@ body {
 .settings {
   border: solid;
 }
+
+/* .displaySingleArticle .commentForm {
+  border: solid;
+} */
 
 /* .comment {
   border: solid;

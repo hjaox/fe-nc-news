@@ -34,11 +34,31 @@ export function getCommentsByArticleID(article_id) {
 export function patchArticleByVote(article, upvote) {
     const {article_id} = article;
     const updatedData = upvote ? {inc_votes: 1} : {inc_votes: -1};
-    console.log(article.votes, 'axios')
     return instance.patch(`/api/articles/${article_id}`, updatedData)
     .then(({data}) => {
-        console.log('here')
-        console.log(data)
+        return data
     })
     
+}
+
+export function getAllTopics() {
+    return instance.get('/api/topics')
+    .then(({data}) => {
+        return data
+    })
+}
+
+export function getAllUsers() {
+    return instance.get('/api/users')
+    .then(({data: {users}}) => {
+        return users
+    })
+}
+
+export function postComment(article_id, body, author) {
+    const updatedData = {body, author}
+    return instance.post(`/api/articles/${article_id}/comments`, updatedData)
+    .then(({data: {postedComment}}) => {
+        return postedComment
+    })
 }

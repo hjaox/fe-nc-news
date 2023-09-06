@@ -1,5 +1,42 @@
+import { useContext, useEffect, useState } from "react"
+import { getAllUsers } from "./DisplayRoutes/axios"
+import { UserContext } from "../context/User"
+import Dropdown from 'react-bootstrap/Dropdown'
+
 export default function Settings() {
+    const [allUsers, setAllUsers] = useState([]);
+    const {username, SetCurrentUser} = useContext(UserContext)
+
+    useEffect(() => {
+        getAllUsers()
+        .then(data => {
+            setAllUsers(data)
+        })
+    },[])
+
+    function handleUsername(username) {
+        SetCurrentUser(allUsers.find(user => user.username === username))
+    }
+
     return (
-        <>Settings</>
+        <Dropdown>
+            <Dropdown.Toggle>
+                {username}
+            </Dropdown.Toggle>
+    
+            <Dropdown.Menu className="users-dropdown-menu">
+                {
+                    allUsers.map(user => {
+                        return (
+                            <Dropdown.Item key={`user-${user.username}`} onClick={() => handleUsername(user.username)}>
+                                {user.username}
+                            </Dropdown.Item>
+                        )
+                    })
+                }
+            </Dropdown.Menu>
+        </Dropdown>
+
+        
     )
 }
