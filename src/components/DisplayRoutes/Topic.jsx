@@ -53,7 +53,6 @@ export default function Topic() {
         )
     }
 
-    if(isLoading)  <p>LOADING............</p>
         
     
 
@@ -62,24 +61,20 @@ export default function Topic() {
     
 
     return (
+
         <>
         {
             isLoading ? 
             (<p>LOADING............</p>)
-            :
-            (
-            <>
-            <ArticleSortingBar
-                setSortBy={setSortBy}
-                setOrderBy={setOrderBy}
-                isLoading={isLoading}/>
-            <div className="displayArticlesByTopics">
-                <GroupArticleCard articlesToDisplay={articlesToDisplay}/>
-            </div>
-            </>
-            )
+            : ''
         }
-        
+        <ArticleSortingBar
+            setSortBy={setSortBy}
+            setOrderBy={setOrderBy}
+            isLoading={isLoading}/>
+        <div className="displayArticlesByTopics">
+            <GroupArticleCard articlesToDisplay={articlesToDisplay}/>
+        </div>
         </>
         
         
