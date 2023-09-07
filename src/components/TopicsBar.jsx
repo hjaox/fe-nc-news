@@ -14,7 +14,7 @@ export default function TopicsBar() {
             const topics = data.map(topic => topic.slug)
             handleTopicsDisplay(topics)
         })
-        .catch(() => {
+        .catch((err) => {
             alert('Server Error in fetching topics')
         })
     },[])

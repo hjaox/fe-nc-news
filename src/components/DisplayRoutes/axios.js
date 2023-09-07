@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const instance = axios.create({
     baseURL: 'https://nc-news-ee7w.onrender.com'
+    // baseURL: 'http://localhost:9090'
 })
 
 export function getArticle(article_id) {
@@ -63,9 +64,6 @@ export function patchArticleByVote(article, upvote) {
 
 export function deleteComment(id) {
     return instance.delete(`/api/comments/${id}`)
-    .then(response => {
-        console.log(response)
-    })
 }
 
 
