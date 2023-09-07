@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getArticle } from './axios';
-import ArticleCard from './ArticleCard';
+import SingleArticleCard from './DisplayRouteComponents/SingleArticleCard';
 import { getCommentsByArticleID } from './axios';
-import CommentCard from './CommentCard';
+import CommentCard from './DisplayRouteComponents/CommentCard';
 import { UserContext } from '../../context/User';
 import { postComment } from './axios';
 import { resetCommentForm } from './script';
@@ -53,7 +53,7 @@ export default function Article() {
     return (
         <div className='displaySingleArticle'>
             Single Article Display
-            <ArticleCard article={articleToDisplay}/>
+            <SingleArticleCard article={articleToDisplay}/>
             <form className='commentForm' id='commentForm' onSubmit={(e) => handleSubmitForm(e)}>
                 <input type="text" id='commentFormBody' className='commentFormBody' onChange={(e) => handleCommentFormInput(e)}/>
                 {isPosting ? (<p>POSTING...</p>) : ''}
