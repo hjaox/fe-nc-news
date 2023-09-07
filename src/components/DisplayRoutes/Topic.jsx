@@ -27,53 +27,59 @@ export default function Topic() {
             }
 
             if(err.response.status === 404) {
-                // setArticlesToDisplay([])
-                // checkTopicIfExists(selectedTopic)
-                // .then(bool => {
-                //     setTopicExists(bool)
-                //     console.log()
-                //     setIsLoading(false)
-                // })
+                setArticlesToDisplay([])
+                checkTopicIfExists(selectedTopic)
+                .then(bool => {
+                    setTopicExists(bool)
+                    console.log()
+                    setIsLoading(false)
+                })
             }
         })
     },[selectedTopic, sortBy, orderBy])
 
-    // function checkTopicIfExists(topicToCheck) {
-    //     return getAllTopics()
-    //     .then(topics => {
-    //         return topics
-    //         .map(topic => topics.slug)
-    //         .includes(topicToCheck)
-    //     })
-    // }
+    function checkTopicIfExists(topicToCheck) {
+        return getAllTopics()
+        .then(topics => {
+            return topics
+            .map(topic => topics.slug)
+            .includes(topicToCheck)
+        })
+    }
 
-    // if(!topicExists) {
-    //     return (
-    //         <> <ErrorTopicPage topic={selectedTopic}/> </>
-    //     )
-    // }
-
-    if(isLoading) {
+    if(!topicExists) {
         return (
-            <p>LOADING............</p>
+            <> <ErrorTopicPage topic={selectedTopic}/> </>
         )
     }
 
-    if(!articlesToDisplay.length) {
-        return (
-            <p>No articles to display under topic {selectedTopic}</p>
-        )
-    }
+    if(isLoading)  <p>LOADING............</p>
+        
+    
+
+    if(!articlesToDisplay.length)  <p>No articles to display under topic {selectedTopic}</p>
+       
+    
 
     return (
         <>
-        <ArticleSortingBar
-            setSortBy={setSortBy}
-            setOrderBy={setOrderBy}
-            isLoading={isLoading}/>
-        <div className="displayArticlesByTopics">
-            <GroupArticleCard articlesToDisplay={articlesToDisplay}/>
-        </div>
+        {
+            isLoading ? 
+            (<p>LOADING............</p>)
+            :
+            (
+            <>
+            <ArticleSortingBar
+                setSortBy={setSortBy}
+                setOrderBy={setOrderBy}
+                isLoading={isLoading}/>
+            <div className="displayArticlesByTopics">
+                <GroupArticleCard articlesToDisplay={articlesToDisplay}/>
+            </div>
+            </>
+            )
+        }
+        
         </>
         
         

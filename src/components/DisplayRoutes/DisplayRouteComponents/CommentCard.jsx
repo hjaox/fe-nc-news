@@ -24,7 +24,9 @@ export default function CommentCard({comment}) {
             setDeleting(false)
         })
         .catch(err => {
-            console.log(err)
+            if(err.code === 'ERR_NETWORK') {
+                alert('Deleting failed, check your internet connection')
+            }
         })
     }
 

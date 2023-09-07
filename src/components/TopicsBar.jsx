@@ -15,7 +15,6 @@ export default function TopicsBar() {
             handleTopicsDisplay(topics)
         })
         .catch((err) => {
-            console.dir(err)
             alert('Server Error in fetching topics')
         })
     },[])

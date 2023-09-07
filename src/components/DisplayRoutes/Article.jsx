@@ -7,6 +7,7 @@ import CommentCard from './DisplayRouteComponents/CommentCard';
 import { UserContext } from '../../context/User';
 import { postComment } from './axios';
 import { resetCommentForm } from './script';
+import ErrorArticlePage from './DisplayRouteComponents/ErrorArticlePage';
 
 export default function Article() {
     const [articleToDisplay, setArticleToDisplay] = useState([]);
@@ -15,16 +16,33 @@ export default function Article() {
     const [isPosting, setIsPosting] = useState(false)
     const {article_id} = useParams();
     const {username} = useContext(UserContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const [articleExists, setArticleExists] = useState(true)
     
     useEffect(() => {
+        setIsLoading(true)
         const promises = [getArticle(article_id), getCommentsByArticleID(article_id)];
         Promise.all(promises)
         .then(([article,comments]) => {
             setArticleToDisplay(article);
             setCommentsToDisplay(comments)
+            setIsLoading(false);
+            resetCommentForm();
         })
-        resetCommentForm();
+        .catch(err => {
+            if(err.response.status === 404) {
+                setArticleExists(false)
+            }
+            
+        })
+        
     },[article_id])
+
+    if(!articleExists) {
+        return (
+            <><ErrorArticlePage article_id={article_id}/></>
+        )
+    }
 
     function handleSubmitForm(e) {
         e.preventDefault();
@@ -53,6 +71,9 @@ export default function Article() {
     return (
         <div className='displaySingleArticle'>
             Single Article Display
+            {
+                isLoading ? (<p>LOADING...</p>) : ''
+            }
             <SingleArticleCard article={articleToDisplay}/>
             <form className='commentForm' id='commentForm' onSubmit={(e) => handleSubmitForm(e)}>
                 <input type="text" id='commentFormBody' className='commentFormBody' onChange={(e) => handleCommentFormInput(e)}/>
@@ -70,7 +91,6 @@ export default function Article() {
                     })
                 }
             </div>
-            
         </div>
     )
 }
