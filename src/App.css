@@ -240,9 +240,7 @@
 
   .displaySingleArticle button.active {
     background-color: red
-  };
-
-  
+  }
   
   .displaySingleArticle .comment .commentAuthor {
     grid-area: commentAuthor;
