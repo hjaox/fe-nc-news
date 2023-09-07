@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getAllArticles } from "./axios";
+import { getAllArticles, getAllTopics } from "./axios";
 import ArticleSortingBar from "./DisplayRouteComponents/ArticleSortingBar";
 import GroupArticleCard from "./DisplayRouteComponents/GroupArticleCard";
+import ErrorTopicPage from "./DisplayRouteComponents/ErrorTopicPage";
 
 
 export default function Topic() {
@@ -11,6 +12,7 @@ export default function Topic() {
     const [isLoading, setIsLoading] = useState(true);
     const [sortBy, setSortBy] = useState('');
     const [orderBy, setOrderBy] = useState('')
+    const [topicExists, setTopicExists] = useState(true)
     
     useEffect(() => {
         setIsLoading(true)
@@ -25,13 +27,37 @@ export default function Topic() {
             }
 
             if(err.response.status === 404) {
-                setArticlesToDisplay([])
-                setIsLoading(false)
+                // setArticlesToDisplay([])
+                // checkTopicIfExists(selectedTopic)
+                // .then(bool => {
+                //     setTopicExists(bool)
+                //     console.log()
+                //     setIsLoading(false)
+                // })
             }
         })
     },[selectedTopic, sortBy, orderBy])
 
-    if(isLoading) <p>LOADING............</p>
+    // function checkTopicIfExists(topicToCheck) {
+    //     return getAllTopics()
+    //     .then(topics => {
+    //         return topics
+    //         .map(topic => topics.slug)
+    //         .includes(topicToCheck)
+    //     })
+    // }
+
+    // if(!topicExists) {
+    //     return (
+    //         <> <ErrorTopicPage topic={selectedTopic}/> </>
+    //     )
+    // }
+
+    if(isLoading) {
+        return (
+            <p>LOADING............</p>
+        )
+    }
 
     if(!articlesToDisplay.length) {
         return (
