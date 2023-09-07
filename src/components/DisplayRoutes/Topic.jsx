@@ -20,7 +20,14 @@ export default function Topic() {
             setIsLoading(false)
         })
         .catch(err => {
-            console.log(err)
+            if(err.code === 'ERR_NETWORK') {
+                alert('Check your internet connection')
+            }
+
+            if(err.response.status === 404) {
+                setArticlesToDisplay([])
+                setIsLoading(false)
+            }
         })
     },[selectedTopic, sortBy, orderBy])
 
@@ -36,7 +43,8 @@ export default function Topic() {
         <>
         <ArticleSortingBar
             setSortBy={setSortBy}
-            setOrderBy={setOrderBy}/>
+            setOrderBy={setOrderBy}
+            isLoading={isLoading}/>
         <div className="displayArticlesByTopics">
             <GroupArticleCard articlesToDisplay={articlesToDisplay}/>
         </div>

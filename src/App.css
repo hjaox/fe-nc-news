@@ -284,14 +284,18 @@
   }
 
   .articleSortingBar .order {
-    width: 50%;
+    width: 10%;
     position: relative;
   }
 
   .articleSortingBar .asc,
   .articleSortingBar .desc {
     position: absolute;
-    width: 30%;
+    width: 100%;
+  }
+
+  .articleSortingBar .sortingStatus .hidden {
+    visibility: hidden;
   }
 
   .dropdown .sortBy-dropdown-menu {

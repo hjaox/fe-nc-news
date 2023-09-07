@@ -7,8 +7,10 @@ export default function DisplayRouter() {
         <>
         Display Router
         <Routes>
-            <Route path='/articles/:article_id' element={<Article />}/>
+            <Route path='/' element={<Topic />}/>
             <Route path='/:selectedTopic' element={<Topic />}/>
+            <Route path='/articles/:article_id' element={<Article />}/>
+            
             <Route/>
         </Routes>
         </>

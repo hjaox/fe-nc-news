@@ -20,13 +20,6 @@ export function getAllArticles(topic, sortBy, orderBy) {
     .then(({data: {articles}}) => {
         return articles
     })
-    .catch(({response}) => {
-        if(response.status === 404) {
-            return []
-        } else {
-            console.log(response, 'check axios line 27')
-        }
-    })
 }
 
 export function getCommentsByArticleID(article_id) {
@@ -34,16 +27,6 @@ export function getCommentsByArticleID(article_id) {
     then(({data: {comments}}) => {
         return comments
     })
-}
-
-export function patchArticleByVote(article, upvote) {
-    const {article_id} = article;
-    const updatedData = upvote ? {inc_votes: 1} : {inc_votes: -1};
-    return instance.patch(`/api/articles/${article_id}`, updatedData)
-    .then(({data}) => {
-        return data
-    })
-    
 }
 
 export function getAllTopics() {
@@ -67,3 +50,23 @@ export function postComment(article_id, body, author) {
         return postedComment
     })
 }
+
+export function patchArticleByVote(article, upvote) {
+    const {article_id} = article;
+    const updatedData = upvote ? {inc_votes: 1} : {inc_votes: -1};
+    return instance.patch(`/api/articles/${article_id}`, updatedData)
+    .then(({data}) => {
+        return data
+    })
+    
+}
+
+export function deleteComment(id) {
+    return instance.delete(`/api/comments/${id}`)
+    .then(response => {
+        console.log(response)
+    })
+}
+
+
+

@@ -2,10 +2,11 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-export default function ArticleSortingBar({setSortBy, setOrderBy}) {
+export default function ArticleSortingBar({setSortBy, setOrderBy, isLoading}) {
     const [selectedSortBy, setSelectedSortBy] = useState('Date')
     const [orderByAsc, setOrderByAsc] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams()
+    
 
     useEffect(() => {
         setSortBy(initialState => {
@@ -55,6 +56,9 @@ export default function ArticleSortingBar({setSortBy, setOrderBy}) {
             <div className='order'>
                 <button className={`asc ${orderByAsc ? 'active' : ''}`} onClick={() => handleOrderBy(true)}>↑</button>
                 <button className={`desc ${!orderByAsc ? 'active' : ''}`} onClick={() => handleOrderBy(false)}>↓</button>
+            </div>
+            <div className='sortingStatus'>
+                <p className={`${isLoading ? 'active' : 'hidden'}`}>Sorting....</p>
             </div>
         </div>
         
