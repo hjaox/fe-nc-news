@@ -31,14 +31,14 @@ export default function TopicsBar() {
 
     function handleTopic(topic) {
         setSelectedTopic(topic)
-        topic === 'All' ? nav(`/`) : nav(`/topics/${topic}`)
+        nav(`/${topic}`)
     }
 
 
     return (
         <Dropdown>
             <Dropdown.Toggle>
-                {selectedTopic}
+                Topic:{selectedTopic}
             </Dropdown.Toggle>
     
             <Dropdown.Menu className="topics-dropdown-menu">

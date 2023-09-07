@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { patchArticleByVote } from "./axios";
+import { patchArticleByVote } from "../axios";
 
 export default function ArticleVotesCard({articleToDisplay, setArticleToDisplay}) {
     const [isUpVoted, setIsUpVoted] = useState(false);

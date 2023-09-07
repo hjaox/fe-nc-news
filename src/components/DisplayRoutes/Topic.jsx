@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAllArticles } from "./axios";
-import ArticleCard from "./ArticleCard";
+import ArticleSortingBar from "./DisplayRouteComponents/ArticleSortingBar";
+import GroupArticleCard from "./DisplayRouteComponents/GroupArticleCard";
+
 
 export default function Topic() {
     const {selectedTopic} = useParams()
     const [articlesToDisplay, setArticlesToDisplay] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
+    const [sortBy, setSortBy] = useState('');
+    const [orderBy, setOrderBy] = useState('')
+    
     useEffect(() => {
         setIsLoading(true)
-        getAllArticles()
+        getAllArticles(selectedTopic, sortBy, orderBy)
         .then(articles => {
-            const filteredArticles = articles.filter(article => article.topic === selectedTopic);
-            setArticlesToDisplay(filteredArticles)
+            setArticlesToDisplay(articles)
             setIsLoading(false)
         })
         .catch(err => {
-            alert('Error useEffect Topic')
+            console.log(err)
         })
-    },[selectedTopic])
+    },[selectedTopic, sortBy, orderBy])
 
     if(isLoading) <p>LOADING............</p>
 
@@ -29,21 +33,15 @@ export default function Topic() {
     }
 
     return (
+        <>
+        <ArticleSortingBar
+            setSortBy={setSortBy}
+            setOrderBy={setOrderBy}/>
         <div className="displayArticlesByTopics">
-            {
-            articlesToDisplay.map(article => {
-                return (
-                    <div key={article.article_id} className='article'>
-                    <h3 className="articleTitle">{article.title}</h3>
-                    <img className="articleImg" src={article.article_img_url} alt="article-img" />
-                    <h4 className="articleAuthor">By: {article.author}</h4>
-                    <span className="articleVotes">{article.votes}</span>
-                    <span className="articleCommentCount">{article.comment_count}</span>
-                </div>
-                )
-            })
-            }
+            <GroupArticleCard articlesToDisplay={articlesToDisplay}/>
         </div>
+        </>
+        
         
     )
 }

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { resetCustomSearchForm } from "./DisplayRoutes/script"
 
 export default function CustomSearchBar() {
     const [searchInput, setSearchInput] = useState('')
@@ -11,6 +12,7 @@ export default function CustomSearchBar() {
 
     function handleSubmit(event) {
         event.preventDefault();
+        resetCustomSearchForm();
         nav(`/articles/${searchInput}`)
     }
 

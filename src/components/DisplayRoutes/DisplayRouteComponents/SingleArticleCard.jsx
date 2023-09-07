@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ArticleVotesCard from "./ArticleVotesCard";
 
-export default function ArticleCard({ article }) {
+export default function SingleArticleCard({ article }) {
   const [articleToDisplay, setArticleToDisplay] = useState({});
 
   useEffect(() => {

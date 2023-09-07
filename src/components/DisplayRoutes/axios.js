@@ -9,18 +9,23 @@ export function getArticle(article_id) {
     .then(({data: {article}}) => {
         return article
     })
-    .catch(err => {
-        console.log(err)
-    })
 }
 
-export function getAllArticles() {
-    return instance.get(`/api/articles?limit=100`)
+export function getAllArticles(topic, sortBy, orderBy) {
+    let baseUrl = '/api/articles?limit=100';
+    baseUrl += topic && topic !== 'All' ? `&topic=${topic}` : '';
+    baseUrl += sortBy ? `&sort_by=${sortBy}` : '';
+    baseUrl += orderBy ? `&order=${orderBy}` : '';
+    return instance.get(baseUrl)
     .then(({data: {articles}}) => {
         return articles
     })
-    .catch(err => {
-        console.log(err)
+    .catch(({response}) => {
+        if(response.status === 404) {
+            return []
+        } else {
+            console.log(response, 'check axios line 27')
+        }
     })
 }
 
