@@ -19,7 +19,7 @@ SOURCE CODE:
                     "react-bootstrap": "^2.8.0",
                     "react-dom": "^18.2.0",
                     "react-router-dom": "^6.15.0"
-                devDependencies (for testing purposes)
+                devDependencies
                     "@types/react": "^18.2.15",
                     "@types/react-dom": "^18.2.7",
                     "@vitejs/plugin-react": "^4.0.3",
