@@ -9,14 +9,16 @@ function App() {
 
   return (
     <>
-      <header className='header'>
-        <Header/>
-      </header>
-      <section className='settings'>
+      <div className='top'>
+        <header className='header'>
+          <Header/>
+        </header>
+        <section className='settings'>
           <Settings/>
         </section>
+      </div>
+      
       <main>
-        
         <section className='customsearchbar'>
           <CustomSearchBar/>
         </section>
