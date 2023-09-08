@@ -16,6 +16,7 @@ export default function SingleArticleCard({ article }) {
     });
   }, [article]);
 
+
   
 
   return (

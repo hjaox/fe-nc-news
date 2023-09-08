@@ -1,22 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { patchArticleByVote } from "../axios";
 
-export default function ArticleVotesCard({articleToDisplay, setArticleToDisplay}) {
+export default function ArticleVotesCard({articleToDisplay, setArticleToDisplay, votes}) {
+    
+    const [voteCount, setVoteCount] = useState(0)
     const [isUpVoted, setIsUpVoted] = useState(false);
     const [upVoteStatus, setUpVoteStatus] = useState(false);
     const [isDownVoted, setIsDownVoted] = useState(false);
     const [downVoteStatus, setDownVoteStatus] = useState(false);
 
+    useEffect(() => {
+      setVoteCount(num => articleToDisplay.votes)
+    },[articleToDisplay.votes, voteCount])
+
     function handleUpVote() {
-        const updatedArticleVotes = { ...articleToDisplay };
+      console.log(voteCount, 'line 17')
+      if(isDownVoted) {
+          downVote()
+          .then(() => {
+            console.log(voteCount, 'line 21')
+            upVote()
+          })
+        } else {
+          upVote()
+        }
+    }
+
+    function upVote() {
+      const updatedArticleVotes = { ...articleToDisplay };
         let plus = null;
         isUpVoted
-          ? (updatedArticleVotes.votes--, setIsUpVoted(false), (plus = false))
-          : (updatedArticleVotes.votes++, setIsUpVoted(true), (plus = true));      
-        setArticleToDisplay(updatedArticleVotes);
-        patchArticleByVote(updatedArticleVotes, plus)
+          ? (updatedArticleVotes.votes--, setIsUpVoted(isUpVoted => false), (plus = false))
+          : (updatedArticleVotes.votes++, setIsUpVoted(isUpVoted => true), (plus = true));
+        // if(isUpVoted) {
+        //   updatedArticleVotes.votes = currentVoteCount++;
+        //   setIsUpVoted(false)
+        //   plus = false
+        // } else {
+        //   updatedArticleVotes.votes = currentVoteCount--;
+        //   setIsUpVoted(true)
+        //   plus = true
+        // }
+        
+        setArticleToDisplay(articleToDisplay => updatedArticleVotes);
+        return patchArticleByVote(updatedArticleVotes, plus)
         .then(() => {
-          upVoteStatus ? setUpVoteStatus(false) : setUpVoteStatus(true);
+          upVoteStatus ? setUpVoteStatus(upVoteStatus => false) : setUpVoteStatus(upVoteStatus => true);
+          setVoteCount(voteCount => updatedArticleVotes.votes)
+          console.log(voteCount, 'line 50')
+          // setVoteCount(updatedArticleVotes.votes)
+          // return updatedArticleVotes.votes
         })
         .catch(err => {
             alert('Server Error')
@@ -24,19 +57,42 @@ export default function ArticleVotesCard({articleToDisplay, setArticleToDisplay}
     }
     
     function handleDownVote() {
-        const updatedArticleVotes = { ...articleToDisplay };
-        let minus = null;
-        isDownVoted
-        ? (updatedArticleVotes.votes++, setIsDownVoted(false), (minus = false))
-        : (updatedArticleVotes.votes--, setIsDownVoted(true), (minus = true));
-        setArticleToDisplay(updatedArticleVotes);
-        patchArticleByVote(updatedArticleVotes, !minus)
+      if(isUpVoted) {
+        upVote()
         .then(() => {
-        downVoteStatus ? setDownVoteStatus(false) : setDownVoteStatus(true);
+          downVote()
         })
-        .catch(err => {
-        alert('Server Error')
-        })
+      } else {
+        downVote()
+      }
+    }
+
+    function downVote() {
+      const updatedArticleVotes = { ...articleToDisplay };
+      let minus = null;
+      isDownVoted
+      ? (updatedArticleVotes.votes++, setIsDownVoted(isDownVoted => false), (minus = false))
+      : (updatedArticleVotes.votes--, setIsDownVoted(isDownVoted => true), (minus = true));
+      // if(isDownVoted) {
+      //   updatedArticleVotes.votes = currentVoteCount++;
+      //   setIsDownVoted(false);
+      //   minus = false;
+      // } else {
+      //   updatedArticleVotes.votes = currentVoteCount--;
+      //   setIsDownVoted(true)
+      //   minus = true
+      // }
+      setArticleToDisplay(articleToDisplay => updatedArticleVotes);
+      return patchArticleByVote(updatedArticleVotes, !minus)
+      .then(() => {
+        downVoteStatus ? setDownVoteStatus(downVoteStatus => false) : setDownVoteStatus(downVoteStatus => true);
+        setVoteCount(voteCount => updatedArticleVotes.votes)
+        // setVoteCount(updatedArticleVotes.votes)
+        // return updatedArticleVotes.votes
+      })
+      .catch(err => {
+      alert('Server Error')
+      })
     }
 
     return (
