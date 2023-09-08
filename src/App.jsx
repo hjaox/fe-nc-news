@@ -12,10 +12,11 @@ function App() {
       <header className='header'>
         <Header/>
       </header>
-      <main>
-        <section className='settings'>
+      <section className='settings'>
           <Settings/>
         </section>
+      <main>
+        
         <section className='customsearchbar'>
           <CustomSearchBar/>
         </section>

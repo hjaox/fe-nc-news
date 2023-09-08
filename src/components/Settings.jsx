@@ -20,8 +20,9 @@ export default function Settings() {
 
     return (
         <Dropdown>
+            <span className="currentUser">{username}</span>
             <Dropdown.Toggle>
-                {username}
+                <div className="dropdown-toggle">test</div>
             </Dropdown.Toggle>
     
             <Dropdown.Menu className="users-dropdown-menu">

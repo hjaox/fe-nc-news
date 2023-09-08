@@ -11,22 +11,30 @@
   }
 
   #root {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas:
+    'header settings'
+    'main main';
     width: 100%;
     align-items: center;
+    grid-template-columns: 3fr 1fr;
+  }
+
+  header {
+    grid-area: header;
   }
 
   main {
+    grid-area: main;
     display: grid;
     width: 100%;
     height: 100%;
     gap: 10px;
-    grid-template-columns: 2fr 10fr 1fr;
+    grid-template-columns: 2fr 10fr;
     grid-template-rows: 30px auto;
     grid-template-areas:
-    'topicsbar customsearchbar settings'
-    'displayrouter displayrouter displayrouter';
+    'topicsbar customsearchbar'
+    'displayrouter displayrouter';
   }
 
   .customsearchbar {
@@ -309,19 +317,24 @@
   /*----------------- settings -------------------*/
   .settings {
     grid-area: settings;
+    height: 100%;
   }
 
-  .users-dropdown-menu {
+  .settings .dropdown {
+    height: 100%;
+  }
+
+  .settings.users-dropdown-menu {
     display: flex;
     flex-direction: column;
     background-color: white;
   }
 
-  .dropdown .users-dropdown-menu {
+  .settings .dropdown .users-dropdown-menu {
     visibility: hidden;
   }
 
-  .show .users-dropdown-menu {
+  .settings  .show .users-dropdown-menu {
     visibility: visible;
   }
   /* .topics-dropdown-menu {
