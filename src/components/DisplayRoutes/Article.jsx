@@ -70,7 +70,6 @@ export default function Article() {
 
     return (
         <div className='displaySingleArticle'>
-            Single Article Display
             {
                 isLoading ? (<p>LOADING...</p>) : ''
             }

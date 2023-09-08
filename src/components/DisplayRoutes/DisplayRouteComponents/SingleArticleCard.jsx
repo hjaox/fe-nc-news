@@ -37,7 +37,7 @@ export default function SingleArticleCard({ article }) {
       votes={articleToDisplay.votes}
       />
 
-      <span className="articleCommentCount">Comment_count: {articleToDisplay.comment_count}</span>
+      <span className="articleCommentCount">Comment: {articleToDisplay.comment_count}</span>
 
     </div>
   );

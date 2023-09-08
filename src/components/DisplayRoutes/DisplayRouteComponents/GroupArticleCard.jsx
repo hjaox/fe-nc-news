@@ -22,9 +22,9 @@ export default function GroupArticleCard({articlesToDisplay}) {
                         Votes: {article.votes}
                     </span>
                     <span className="articleCommentCount">
-                        Comment_count: {article.comment_count}
+                        Comment: {article.comment_count}
                     </span>
-                    <span>
+                    <span className="articleDate">
                         {new Date(article.created_at).toDateString()}
                     </span>
                 </div>

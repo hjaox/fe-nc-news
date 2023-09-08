@@ -53,15 +53,9 @@ export default function Topic() {
         )
     }
 
-        
-    
-
     if(!articlesToDisplay.length)  <p>No articles to display under topic {selectedTopic}</p>
-       
-    
 
     return (
-
         <>
         {
             isLoading ? 
@@ -70,13 +64,10 @@ export default function Topic() {
         }
         <ArticleSortingBar
             setSortBy={setSortBy}
-            setOrderBy={setOrderBy}
-            isLoading={isLoading}/>
+            setOrderBy={setOrderBy}/>
         <div className="displayArticlesByTopics">
             <GroupArticleCard articlesToDisplay={articlesToDisplay}/>
         </div>
         </>
-        
-        
     )
 }
