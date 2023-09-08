@@ -21,8 +21,8 @@ export default function CustomSearchBar() {
     }
 
     return (
-        <form id="customSearchForm" onSubmit={handleSubmit}>
-            <label htmlFor="searchInput">Enter Article ID:</label>
+        <form id="customSearchForm" className='customSearchForm' onSubmit={handleSubmit}>
+            <label htmlFor="searchInput">Search Article #:</label>
             <input name="searchInput" id="searchInput" type="number" onChange={handleSearchInput}/>
             <button type="submit" form="customSearchForm">Search</button>
         </form>

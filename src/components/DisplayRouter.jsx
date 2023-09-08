@@ -8,7 +8,6 @@ import Test from './DisplayRoutes/DisplayRouteComponents/Test'
 export default function DisplayRouter() {
     return (
         <>
-        Display Router
         <Routes>
             <Route path='/' element={<Topic />}/>
             <Route path='/:selectedTopic' element={<Topic />}/>
