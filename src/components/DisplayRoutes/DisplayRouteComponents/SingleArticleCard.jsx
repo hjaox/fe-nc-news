@@ -16,6 +16,7 @@ export default function SingleArticleCard({ article }) {
     });
   }, [article]);
 
+
   
 
   return (
@@ -32,9 +33,8 @@ export default function SingleArticleCard({ article }) {
       <p className="articleBody">{articleToDisplay.body}</p>
 
       <ArticleVotesCard
+      article_id={articleToDisplay.article_id}
       votes={articleToDisplay.votes}
-      articleToDisplay = {articleToDisplay}
-      setArticleToDisplay={setArticleToDisplay}
       />
 
       <span className="articleCommentCount">Comment_count: {articleToDisplay.comment_count}</span>

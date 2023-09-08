@@ -52,9 +52,9 @@ export function postComment(article_id, body, author) {
     })
 }
 
-export function patchArticleByVote(article, upvote) {
-    const {article_id} = article;
-    const updatedData = upvote ? {inc_votes: 1} : {inc_votes: -1};
+export function patchArticleByVote(article_id, upvote, twice) {
+    const val = twice ? 2 : 1;
+    const updatedData = upvote ? {inc_votes: val} : {inc_votes: -val};
     return instance.patch(`/api/articles/${article_id}`, updatedData)
     .then(({data}) => {
         return data
