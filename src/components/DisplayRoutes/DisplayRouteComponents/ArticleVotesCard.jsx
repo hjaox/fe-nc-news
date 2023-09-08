@@ -1,113 +1,102 @@
 import { useEffect, useState } from "react";
 import { patchArticleByVote } from "../axios";
 
-export default function ArticleVotesCard({articleToDisplay, setArticleToDisplay, votes}) {
+export default function ArticleVotesCard({votes, article_id}) {
     
-    const [voteCount, setVoteCount] = useState(0)
+    const [voteCount, setVoteCount] = useState(votes)
     const [isUpVoted, setIsUpVoted] = useState(false);
-    const [upVoteStatus, setUpVoteStatus] = useState(false);
     const [isDownVoted, setIsDownVoted] = useState(false);
-    const [downVoteStatus, setDownVoteStatus] = useState(false);
 
     useEffect(() => {
-      setVoteCount(num => articleToDisplay.votes)
-    },[articleToDisplay.votes, voteCount])
+    }, [voteCount])
 
     function handleUpVote() {
-      console.log(voteCount, 'line 17')
       if(isDownVoted) {
-          downVote()
-          .then(() => {
-            console.log(voteCount, 'line 21')
-            upVote()
-          })
+        upVoteFromDownVote()
         } else {
           upVote()
         }
     }
 
     function upVote() {
-      const updatedArticleVotes = { ...articleToDisplay };
-        let plus = null;
-        isUpVoted
-          ? (updatedArticleVotes.votes--, setIsUpVoted(isUpVoted => false), (plus = false))
-          : (updatedArticleVotes.votes++, setIsUpVoted(isUpVoted => true), (plus = true));
-        // if(isUpVoted) {
-        //   updatedArticleVotes.votes = currentVoteCount++;
-        //   setIsUpVoted(false)
-        //   plus = false
-        // } else {
-        //   updatedArticleVotes.votes = currentVoteCount--;
-        //   setIsUpVoted(true)
-        //   plus = true
-        // }
-        
-        setArticleToDisplay(articleToDisplay => updatedArticleVotes);
-        return patchArticleByVote(updatedArticleVotes, plus)
-        .then(() => {
-          upVoteStatus ? setUpVoteStatus(upVoteStatus => false) : setUpVoteStatus(upVoteStatus => true);
-          setVoteCount(voteCount => updatedArticleVotes.votes)
-          console.log(voteCount, 'line 50')
-          // setVoteCount(updatedArticleVotes.votes)
-          // return updatedArticleVotes.votes
-        })
-        .catch(err => {
-            alert('Server Error')
-        })
+      let updatedVoteCount = voteCount;
+      let plus = null;
+      isUpVoted
+        ? (updatedVoteCount--, setIsUpVoted(() => false), (plus = false))
+        : (updatedVoteCount++, setIsUpVoted(() => true), (plus = true));
+      patchArticleByVote(article_id, plus)
+      .then(() => {
+        setVoteCount(() => updatedVoteCount)
+      })
+      .catch(err => {
+        alert('Failed to vote, please check your internet connection')
+      })
     }
-    
+
+    function upVoteFromDownVote() {
+      let updatedVoteCount = voteCount;
+      updatedVoteCount += 2;
+      patchArticleByVote(article_id, true, true)
+      .then(() => {
+        setIsDownVoted(() => false);
+        setIsUpVoted(() => true);
+        setVoteCount(() => updatedVoteCount)
+      })
+      .catch(err => {
+          alert('Failed to vote, please check your internet connection')
+      })
+    }
+     
     function handleDownVote() {
       if(isUpVoted) {
-        upVote()
-        .then(() => {
-          downVote()
-        })
+        downVoteFromUpVote()
       } else {
         downVote()
       }
     }
 
     function downVote() {
-      const updatedArticleVotes = { ...articleToDisplay };
+      let updatedVoteCount = voteCount;
       let minus = null;
       isDownVoted
-      ? (updatedArticleVotes.votes++, setIsDownVoted(isDownVoted => false), (minus = false))
-      : (updatedArticleVotes.votes--, setIsDownVoted(isDownVoted => true), (minus = true));
-      // if(isDownVoted) {
-      //   updatedArticleVotes.votes = currentVoteCount++;
-      //   setIsDownVoted(false);
-      //   minus = false;
-      // } else {
-      //   updatedArticleVotes.votes = currentVoteCount--;
-      //   setIsDownVoted(true)
-      //   minus = true
-      // }
-      setArticleToDisplay(articleToDisplay => updatedArticleVotes);
-      return patchArticleByVote(updatedArticleVotes, !minus)
+      ? (updatedVoteCount++, setIsDownVoted(() => false), (minus = false))
+      : (updatedVoteCount--, setIsDownVoted(() => true), (minus = true));
+      patchArticleByVote(article_id, !minus)
       .then(() => {
-        downVoteStatus ? setDownVoteStatus(downVoteStatus => false) : setDownVoteStatus(downVoteStatus => true);
-        setVoteCount(voteCount => updatedArticleVotes.votes)
-        // setVoteCount(updatedArticleVotes.votes)
-        // return updatedArticleVotes.votes
+        setVoteCount(() => updatedVoteCount)
       })
       .catch(err => {
-      alert('Server Error')
+        alert('Failed to vote, please check your internet connection')
+      })
+    }
+
+    function downVoteFromUpVote() {
+      let updatedVoteCount = voteCount;
+      updatedVoteCount -= 2;
+      patchArticleByVote(article_id, false, true)
+      .then(() => {
+        setIsDownVoted(() => true)
+        setIsUpVoted(() => false)
+        setVoteCount(() => updatedVoteCount)
+      })
+      .catch(err => {
+      alert('Failed to vote, please check your internet connection')
       })
     }
 
     return (
         <span className="articleVotes">
         <div className="voteCount">
-          {articleToDisplay.votes}
+          {voteCount}
         </div>
         <button
-          className={`upVoteBtn ${upVoteStatus ? "active" : ""}`}
+          className={`upVoteBtn ${isUpVoted ? "active" : ""}`}
           onClick={() => handleUpVote()}
         >
           ↑
         </button>
         <button
-          className={`downVoteBtn ${downVoteStatus ? "active" : ""}`}
+          className={`downVoteBtn ${isDownVoted ? "active" : ""}`}
           onClick={() => handleDownVote()}
         >
           ↓
