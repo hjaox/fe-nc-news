@@ -17,12 +17,12 @@ export default function GroupArticleCard({articlesToDisplay}) {
                         {article.article_id}# {article.title}
                     </h3>
                     <img className="articleImg" src={article.article_img_url} alt="article-img" />
-                    <h4 className="articleAuthor">By: {article.author}</h4>
+                    <h4 className="articleAuthor">By {article.author}</h4>
                     <span className="articleVotes">
-                        Votes: {article.votes}
+                        Votes {article.votes}
                     </span>
                     <span className="articleCommentCount">
-                        Comment: {article.comment_count}
+                        Comments {article.comment_count}
                     </span>
                     <span className="articleDate">
                         {new Date(article.created_at).toDateString()}

@@ -16,11 +16,10 @@
     grid-template-areas:
     'header'
     'main';
-  }
-
-  .header {
-    display: flex;
-    justify-content: space-between;
+    grid-template-rows: 2.5rem auto;
+    gap: 0.2rem;
+    background-color: red;
+    position: relative;
   }
 
   main {
@@ -28,15 +27,42 @@
     display: grid;
     width: 100%;
     height: 100%;
-    gap: 10px;
+    gap: 0.2rem;
     grid-template-columns: 2fr 10fr;
-    grid-template-rows: 30px auto;
+    grid-template-rows: 1.5rem auto;
     grid-template-areas:
     'topicsbar customsearchbar '
     'displayrouter displayrouter ';
+    
   }
 
-  /*----------------- settings -------------------*/
+  /* ------------------------------ header ---------------------------- */
+
+  .header {
+    display: grid;
+    justify-content: space-between;
+    color: white;
+    background-color: red;
+    grid-template-areas:
+    'header settings';
+    padding-left: 0.5rem;
+    border-bottom: 0.1rem solid;
+    border-color: rgb(138, 101, 101);
+    position: sticky;
+    top: 0px;
+  }
+
+  .header header {
+    grid-area: header;
+    margin: auto;
+  }
+
+  .header header h1  {
+    height: 100%;
+    font-size: 1.5rem;
+  }
+
+  /*----------------------------- settings ---------------------------*/
   .settings {
     grid-area: settings;
     display: flex;
@@ -56,7 +82,6 @@
 
   .settings .dropdown .dropdown-toggle {
     grid-area: dropdown-toggle;
-    border: solid;
     width: 2.5rem;
     display: flex;
     flex-direction: column;
@@ -64,11 +89,13 @@
     align-items: center;
     padding: .2rem;
     position: relative;
+    background-color: inherit;
   }
 
   .settings .dropdown-toggle .menu-line {
     border: 1px solid;
     width: 70%;
+    color: white;
   }
 
   .users-dropdown-menu {
@@ -91,17 +118,35 @@
   .topicsbar {
     grid-area: topicsbar;
     display: flex;
+    padding-left: 0.5rem;
   }
 
   .topicsbar .dropdown-toggle {
     width: 100%;
     height: 100%;
+    border-radius: 0.6rem;
+    padding: 0.2rem;
+    background-color: red;
+    color: white;
+    min-width: 7rem;
   }
 
   .topics-dropdown-menu {
     display: flex;
     flex-direction: column;
     background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    gap: 0.5rem;
+    align-items: center;
+    background-color: red;
+    padding: 1rem;
+  }
+
+  .topics-dropdown-menu .dropdown-item {
+    color: white;
+    text-decoration: none;
   }
 
   .dropdown .topics-dropdown-menu {
@@ -120,13 +165,14 @@
 
   .customSearchForm {
     display: inline-flex;
-    border: solid;
     align-items: center;
     gap: 0.5rem;
+    justify-content: center;
   }
 
   .customSearchForm label {
     display: inline-block;
+    color: white;
   }
 
   .customSearchForm input {
@@ -139,13 +185,14 @@
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-    padding: 0 2%;
+    padding: 0.1rem 0;
+    background-color: rgb(201, 199, 199);
   }
 
   /* ----------------------displayRouter-ArticlesByTopic------------- */
   .displayArticlesByTopics {
     width: 100%;
-    gap: 1rem;
+    gap: 0.5rem;
     display: flex;
     flex-direction: column;
   }
@@ -160,9 +207,11 @@
     'articleAuthor articleAuthor articleAuthor'
     'articleVotes articleCommentCount articleDate';
     gap: 0.5rem;
+    background-color: white;
   }
 
   .displayArticlesByTopics .articleTitle {
+    font-size: 1rem;
     grid-area: articleTitle;
   }
 
@@ -174,19 +223,24 @@
   }
 
   .displayArticlesByTopics .articleAuthor {
-    grid-area: articleAuthor
+    grid-area: articleAuthor;
+    font-size: 0.8rem;
   }
 
   .displayArticlesByTopics .articleVotes {
     grid-area: articleVotes;
+    font-size: 0.8rem;
   }
 
   .displayArticlesByTopics .articleCommentCount {
-    grid-area: articleCommentCount
+    grid-area: articleCommentCount;
+    font-size: 0.8rem;
   }
 
   .displayArticlesByTopics .articleDate {
-    grid-area: articleDate
+    grid-area: articleDate;
+    font-size: 0.8rem;
+    margin-left: auto;
   }
   /*----------------- displayRouter-singleArticle -------------------*/
 
@@ -196,8 +250,6 @@
     display: flex;
     flex-direction: column;
   }
-
-
 
   .displaySingleArticle .article {
     padding: 1%;
@@ -273,6 +325,7 @@
   /* -----------articleSortingBar----------- */
   .articleSortingBar {
     display: flex;
+    padding-left: 0.5rem;
   }
 
   .articleSortingBar .dropdown {
@@ -382,82 +435,4 @@
 
 
 /* ---------------to delete after ------------------------*/
-.displayrouter {
-  border: solid;
-}
 
-.displayAllArticles {
-  border:solid;
-  border-color: green;
-}
-
-.displayAllArticles .article {
-  border: solid;
-  border-color: blue;
-}
-
-body {
-  border: solid;
-  border-color: red;
-}
-
-.displayAllArticles {
-  border:solid;
-  border-color: green;
-}
-
-.header {
-  border: solid;
-}
-
-
-
-.topicsbar {
-  border: solid;
-}
-
-.displayrouter {
-  grid-area: displayrouter;
-  border: solid;
-}
-
-.settings {
-  border: solid;
-}
-
-.displayArticlesByTopics .article {
-  border: solid;
-  border-color: blue;
-}
-
-/* .displaySingleArticle .commentForm {
-  border: solid;
-} */
-
-/* .comment {
-  border: solid;
-  border-color: blue;
-} */
-
-/*
-.comment .commentAuthor {
-  border: solid;
-}
-
-.comment .commentCreatedAt {
-  border: solid;
-}
-
-.comment .commentBody {
-  border: solid;
-}
-
-.comment .commentVotes {
-  border: solid;
-}
-
-.displaySingleArticle .article {
-  border: solid;
-  width: 100%;
-  height: 100%;
-} */
