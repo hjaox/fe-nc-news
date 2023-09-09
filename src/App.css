@@ -317,6 +317,11 @@
   }
 
   /* ----------------------------comments---------------------- */
+  .displaySingleArticle .comments {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
   .displaySingleArticle .commentForm {
     display: grid;
@@ -330,12 +335,27 @@
 
   .displaySingleArticle .comment {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 6rem auto 1fr;
     grid-template-areas:
-    'commentAuthor commentCreatedAt'
-    'commentBody commentBody'
-    'commentVotes commentVotes';
-    gap: 10px;
+    'commentAuthor commentAuthor commentCreatedAt'
+    'commentBody commentBody commentBody'
+    'commentVotes _ _';
+    gap: 0.2rem;
+  }
+
+  .displaySingleArticle .comment .commentVotes {
+    grid-area: commentVotes;
+    display: flex;
+  }
+
+  .displaySingleArticle .comment .upVoteBtn,
+  .displaySingleArticle .comment .downVoteBtn,
+  .displaySingleArticle .comment .voteCount {
+    width: 2rem;
+  }
+
+  .displaySingleArticle .comment .voteCount {
+    text-align: center;
   }
 
   .displaySingleArticle .articleCommentCount {
@@ -355,9 +375,7 @@
     grid-area: commentBody;
   }
   
-  .displaySingleArticle .comment .commentVotes {
-    grid-area: commentVotes;
-  }
+  
 
 } 
 /* end of media screen */

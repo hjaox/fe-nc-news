@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Dropdown from 'react-bootstrap/Dropdown'
 import { useNavigate } from 'react-router-dom'
-import { getAllTopics } from "./DisplayRoutes/axios";
+import { getAllTopics } from "../lib/axios";
 
 export default function TopicsBar() {
     const [selectedTopic, setSelectedTopic] = useState('All');

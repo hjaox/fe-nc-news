@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getAllArticles, getAllTopics } from "./axios";
-import ArticleSortingBar from "./DisplayRouteComponents/ArticleSortingBar";
-import GroupArticleCard from "./DisplayRouteComponents/GroupArticleCard";
-import ErrorTopicPage from "./DisplayRouteComponents/ErrorTopicPage";
+import { getAllArticles, getAllTopics } from "../../../lib/axios";
+import ArticleSortingBar from "./TopicComponents/ArticleSortingBar";
+import GroupArticleCard from "./TopicComponents/GroupArticleCard";
+import ErrorTopicPage from "../ErrorPages/ErrorTopicPage";
 
 
 export default function Topic() {

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { getAllUsers } from "./DisplayRoutes/axios"
+import { getAllUsers } from "../lib/axios"
 import { UserContext } from "../context/User"
 import Dropdown from 'react-bootstrap/Dropdown'
 

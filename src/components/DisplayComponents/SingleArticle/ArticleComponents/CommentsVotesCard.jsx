@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { patchArticleByVote } from "../axios";
+import { patchCommentByVote } from "../../../../lib/axios";
 
-export default function ArticleVotesCard({votes, article_id}) {
-    
+export default function CommentsVotesCard({votes, comment_id}) {
     const [voteCount, setVoteCount] = useState(votes)
     const [isUpVoted, setIsUpVoted] = useState(false);
     const [isDownVoted, setIsDownVoted] = useState(false);
-
     useEffect(() => {
     }, [voteCount])
 
@@ -24,7 +22,7 @@ export default function ArticleVotesCard({votes, article_id}) {
       isUpVoted
         ? (updatedVoteCount--, setIsUpVoted(() => false), (plus = false))
         : (updatedVoteCount++, setIsUpVoted(() => true), (plus = true));
-      patchArticleByVote(article_id, plus)
+      patchCommentByVote(comment_id, plus)
       .then(() => {
         setVoteCount(() => updatedVoteCount)
       })
@@ -36,7 +34,7 @@ export default function ArticleVotesCard({votes, article_id}) {
     function upVoteFromDownVote() {
       let updatedVoteCount = voteCount;
       updatedVoteCount += 2;
-      patchArticleByVote(article_id, true, true)
+      patchCommentByVote(comment_id, true, true)
       .then(() => {
         setIsDownVoted(() => false);
         setIsUpVoted(() => true);
@@ -61,7 +59,7 @@ export default function ArticleVotesCard({votes, article_id}) {
       isDownVoted
       ? (updatedVoteCount++, setIsDownVoted(() => false), (minus = false))
       : (updatedVoteCount--, setIsDownVoted(() => true), (minus = true));
-      patchArticleByVote(article_id, !minus)
+      patchCommentByVote(comment_id, !minus)
       .then(() => {
         setVoteCount(() => updatedVoteCount)
       })
@@ -73,7 +71,7 @@ export default function ArticleVotesCard({votes, article_id}) {
     function downVoteFromUpVote() {
       let updatedVoteCount = voteCount;
       updatedVoteCount -= 2;
-      patchArticleByVote(article_id, false, true)
+      patchCommentByVote(comment_id, false, true)
       .then(() => {
         setIsDownVoted(() => true)
         setIsUpVoted(() => false)
@@ -85,16 +83,16 @@ export default function ArticleVotesCard({votes, article_id}) {
     }
 
     return (
-        <span className="articleVotes">
-        <div className="voteCount">
-          {voteCount}
-        </div>
+        <span className="commentVotes">        
         <button
           className={`upVoteBtn ${isUpVoted ? "active" : ""}`}
           onClick={() => handleUpVote()}
         >
           ↑
         </button>
+        <div className="voteCount">
+          {voteCount}
+        </div>
         <button
           className={`downVoteBtn ${isDownVoted ? "active" : ""}`}
           onClick={() => handleDownVote()}

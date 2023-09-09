@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
-import { UserContext } from "../../../context/User"
-import { deleteComment } from "../axios";
+import { UserContext } from "../../../../context/User";
+import { deleteComment } from "../../../../lib/axios";
 import CommentsVotesCard from "./CommentsVotesCard";
 
 export default function CommentCard({comment}) {

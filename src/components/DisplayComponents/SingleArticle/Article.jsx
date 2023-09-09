@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getArticle } from './axios';
-import SingleArticleCard from './DisplayRouteComponents/SingleArticleCard';
-import { getCommentsByArticleID } from './axios';
-import CommentCard from './DisplayRouteComponents/CommentCard';
-import { UserContext } from '../../context/User';
-import { postComment } from './axios';
-import { resetCommentForm } from './script';
-import ErrorArticlePage from './DisplayRouteComponents/ErrorArticlePage';
+import { getArticle } from '../../../lib/axios';
+import SingleArticleCard from './ArticleComponents/SingleArticleCard';
+import { getCommentsByArticleID } from '../../../lib/axios';
+import CommentCard from './ArticleComponents/CommentCard';
+import { UserContext } from '../../../context/User';
+import { postComment } from '../../../lib/axios';
+import { resetCommentForm } from '../../script';
+import ErrorArticlePage from '../ErrorPages/ErrorArticlePage';
 
 export default function Article() {
     const [articleToDisplay, setArticleToDisplay] = useState([]);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { resetCustomSearchForm } from "./DisplayRoutes/script"
+import { resetCustomSearchForm } from "./script"
 
 export default function CustomSearchBar() {
     const [searchInput, setSearchInput] = useState('')
