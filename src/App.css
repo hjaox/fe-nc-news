@@ -14,58 +14,35 @@
     display: grid;
     width: 100%;
     grid-template-areas:
-    'header'
-    'main';
-    grid-template-rows: 2.5rem auto;
-    gap: 0.2rem;
+    'header settings'
+    'border1 border1'
+    'topicsbar customsearchbar'
+    'border2 border2'
+    'displayrouter displayrouter';
+    grid-template-rows: 2.5rem auto 2.3rem auto;
+    grid-template-columns: 2fr 3fr;
     background-color: red;
     position: relative;
   }
 
-  main {
-    grid-area: main;
-    display: grid;
-    width: 100%;
-    height: 100%;
-    gap: 0.2rem;
-    grid-template-columns: 2fr 10fr;
-    grid-template-rows: 1.5rem auto;
-    grid-template-areas:
-    'topicsbar customsearchbar '
-    'displayrouter displayrouter ';
-    
-  }
-
   /* ------------------------------ header ---------------------------- */
 
-  .header {
-    display: grid;
-    justify-content: space-between;
+  header {
+    display: flex;
     color: white;
-    background-color: red;
-    grid-template-areas:
-    'header settings';
     padding-left: 0.5rem;
-    border-bottom: 0.1rem solid;
-    border-color: rgb(138, 101, 101);
     position: sticky;
     top: 0px;
-  }
-
-  .header header {
-    grid-area: header;
-    margin: auto;
-  }
-
-  .header header h1  {
-    height: 100%;
-    font-size: 1.5rem;
+    font-size: 0.8rem;
+    align-items: center;
   }
 
   /*----------------------------- settings ---------------------------*/
   .settings {
     grid-area: settings;
     display: flex;
+    justify-self: right;
+    color: white;
   }
 
   .settings .dropdown {
@@ -108,6 +85,7 @@
     align-items: center;
     padding: 1rem;
     gap: 0.5rem;
+    z-index: 1;
   }
 
   .users-dropdown-menu .dropdown-item {
@@ -123,12 +101,29 @@
     visibility: visible;
   }
 
+  /* -------------------------------- border ----------------------------- */
+  .border1,
+  .border2{
+    border: 1px solid;
+    border-color: rgb(138, 101, 101);
+  }
+
+  .border1 {
+    grid-area: border1;
+  }
+
+  .border2 {
+    grid-area: border2;
+  }
+
   /*----------------- topicsbar -------------------*/
 
   .topicsbar {
+    padding: 0.2rem;
     grid-area: topicsbar;
     display: flex;
-    /* padding-left: 0.5rem; */
+    height: 80%;
+    align-self: center;
   }
 
   .topicsbar .dropdown-toggle {
@@ -139,6 +134,7 @@
     background-color: red;
     color: white;
     min-width: 7rem;
+    
   }
 
   .topics-dropdown-menu {
@@ -150,6 +146,7 @@
     align-items: center;
     background-color: red;
     padding: 1rem;
+    position: absolute;
   }
 
   .topics-dropdown-menu .dropdown-item {
@@ -194,7 +191,7 @@
     grid-area: displayrouter;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.1rem;
     padding: 0.1rem 0;
     background-color: rgb(201, 199, 199);
   }
@@ -454,7 +451,8 @@
 
 @media screen and (min-width: 429px) {
   body {
-    background-color: blue
+    display: flex;
+    background-color: white
   };
 }
 /* ---------------to delete after ------------------------*/

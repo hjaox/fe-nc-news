@@ -36,7 +36,7 @@ export default function TopicsBar() {
 
 
     return (
-        <Dropdown>
+        <Dropdown >
             <Dropdown.Toggle>
                 Topic:{selectedTopic}
             </Dropdown.Toggle>
