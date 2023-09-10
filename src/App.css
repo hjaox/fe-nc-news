@@ -189,6 +189,53 @@
     background-color: rgb(201, 199, 199);
   }
 
+   /* -----------articleSortingBar----------- */
+   .articleSortingBar {
+    display: flex;
+    padding-left: 0.5rem;
+  }
+
+  .articleSortingBar .dropdown {
+    width: 20%;
+  }
+
+  .articleSortingBar .dropdown .dropdown-toggle {
+    width: 80%;
+  }
+ 
+  .articleSortingBar .sortBy-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+  }
+
+  .articleSortingBar button.active {
+    visibility: hidden;
+  }
+
+  .articleSortingBar .order {
+    width: 10%;
+    position: relative;
+  }
+
+  .articleSortingBar .asc,
+  .articleSortingBar .desc {
+    position: absolute;
+    width: 100%;
+  }
+
+  .articleSortingBar .sortingStatus .hidden {
+    visibility: hidden;
+  }
+
+  .dropdown .sortBy-dropdown-menu {
+    visibility: hidden;
+  }
+
+  .show .sortBy-dropdown-menu {
+    visibility: visible;
+  }
+
   /* ----------------------displayRouter-ArticlesByTopic------------- */
   .displayArticlesByTopics {
     width: 100%;
@@ -246,13 +293,13 @@
 
   .displaySingleArticle {
     width: 100%;
-    gap: 1rem;
+    gap: 0.3rem;
     display: flex;
     flex-direction: column;
   }
 
   .displaySingleArticle .article {
-    padding: 1%;
+    padding: 2%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto auto auto 1rem;
@@ -262,9 +309,8 @@
     'articleImg articleImg articleImg'
     'articleBody articleBody articleBody'
     'articleVotes _ articleCommentCount';
-  }  
-
-
+    background-color: white;
+  } 
 
   .displaySingleArticle .articleTitle {
     grid-area: articleTitle;
@@ -320,70 +366,31 @@
   .displaySingleArticle button.active {
     background-color: red
   }
-  
-
-  /* -----------articleSortingBar----------- */
-  .articleSortingBar {
-    display: flex;
-    padding-left: 0.5rem;
-  }
-
-  .articleSortingBar .dropdown {
-    width: 20%;
-  }
-
-  .articleSortingBar .dropdown .dropdown-toggle {
-    width: 80%;
-  }
- 
-  .articleSortingBar .sortBy-dropdown-menu {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-  }
-
-  .articleSortingBar button.active {
-    visibility: hidden;
-  }
-
-  .articleSortingBar .order {
-    width: 10%;
-    position: relative;
-  }
-
-  .articleSortingBar .asc,
-  .articleSortingBar .desc {
-    position: absolute;
-    width: 100%;
-  }
-
-  .articleSortingBar .sortingStatus .hidden {
-    visibility: hidden;
-  }
-
-  .dropdown .sortBy-dropdown-menu {
-    visibility: hidden;
-  }
-
-  .show .sortBy-dropdown-menu {
-    visibility: visible;
-  }
 
   /* ----------------------------comments---------------------- */
   .displaySingleArticle .comments {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.3rem;
   }
 
   .displaySingleArticle .commentForm {
-    display: grid;
-    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    align-items: center;
   }
 
   .displaySingleArticle .commentForm .commentFormBody{
     min-height: 3rem;
-    border: solid;
+    width: 100%;
+    border: 1px solid;
+  }
+
+  .displaySingleArticle .commentForm .submitButton{
+    width: 50%;
+    height: 1.5rem;
+    border-radius: 2rem;
   }
 
   .displaySingleArticle .comment {
@@ -393,7 +400,9 @@
     'commentAuthor commentAuthor commentCreatedAt'
     'commentBody commentBody commentBody'
     'commentVotes _ _';
-    gap: 0.2rem;
+    gap: 0.5rem;
+    background-color: white;
+    padding: 1%;
   }
 
   .displaySingleArticle .comment .commentVotes {

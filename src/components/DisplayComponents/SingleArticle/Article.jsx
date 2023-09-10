@@ -33,7 +33,6 @@ export default function Article() {
             if(err.response.status === 404) {
                 setArticleExists(false)
             }
-            
         })
         
     },[article_id])
@@ -75,9 +74,9 @@ export default function Article() {
             }
             <SingleArticleCard article={articleToDisplay}/>
             <form className='commentForm' id='commentForm' onSubmit={(e) => handleSubmitForm(e)}>
-                <input type="text" id='commentFormBody' className='commentFormBody' onChange={(e) => handleCommentFormInput(e)}/>
+                <input type="text" id='commentFormBody' className='commentFormBody' onChange={(e) => handleCommentFormInput(e)} placeholder='Enter your comment'/>
                 {isPosting ? (<p>POSTING...</p>) : ''}
-                <button form='commentForm' type='submit'>Submit</button>
+                <button className='submitButton' form='commentForm' type='submit'>Submit</button>
             </form>
             <div className='comments'>
                 {

@@ -12,12 +12,12 @@ export default function SingleArticleCard({ article }) {
       for (const [key, value] of Object.entries(article)) {
         obj[key] = value;
       }
-      return obj;
-    });
+      return obj
+    })
   }, [article]);
 
 
-  
+  console.log('here')
 
   return (
     <div key={articleToDisplay.article_id} className="article">
