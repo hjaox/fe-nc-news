@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 428px) {
+/* @media screen and (max-width: 428px) { */
   body {
     display: flex;
     justify-content: center;
@@ -446,14 +446,14 @@
   
   
 
-} 
+/* } 
 /* end of media screen */
 
-@media screen and (min-width: 429px) {
+/* @media screen and (min-width: 429px) {
   body {
     display: flex;
     background-color: white
-  };
-}
+  }; */
+/* } */ 
 /* ---------------to delete after ------------------------*/
 
