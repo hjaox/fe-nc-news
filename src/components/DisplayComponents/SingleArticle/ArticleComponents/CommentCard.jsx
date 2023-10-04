@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
-import { UserContext } from "../../../context/User"
-import { deleteComment } from "../axios";
+import { UserContext } from "../../../../context/User";
+import { deleteComment } from "../../../../lib/axios";
+import CommentsVotesCard from "./CommentsVotesCard";
 
 export default function CommentCard({comment}) {
     const {username} = useContext(UserContext);
@@ -29,7 +30,7 @@ export default function CommentCard({comment}) {
             }
         })
     }
-
+    
     return (
         <>
         {
@@ -39,6 +40,7 @@ export default function CommentCard({comment}) {
             :
             (
                 <>
+                
                 <h4 className="commentAuthor">
                     By: {comment.author}
                 </h4>
@@ -48,9 +50,6 @@ export default function CommentCard({comment}) {
                 <p className="commentBody">
                     {comment.body}
                 </p>
-                <span className="commentVotes">
-                    {comment.votes}
-                </span>
                 {
                     displayOptions ? 
                     (
@@ -60,17 +59,21 @@ export default function CommentCard({comment}) {
                             deleting ?
                             (<p>Deleting Comment......</p>)
                             :
-                            <span>
-                                <button onClick={() => handleDeleteComment()}>delete</button>
-                            </span>
+                            (<span>
+                                <button className="submitButton" onClick={() => handleDeleteComment()}>delete</button>
+                            </span>)
                         }
                         </>
                     )
-                    : ''
+                    : 
+                    (<CommentsVotesCard
+                    votes={comment.votes}
+                    comment_id={comment.comment_id}
+                    />)
+
                 }
                 </>
             )
-            
         }
         </>
     )

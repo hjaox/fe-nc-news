@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getAllArticles, getAllTopics } from "./axios";
-import ArticleSortingBar from "./DisplayRouteComponents/ArticleSortingBar";
-import GroupArticleCard from "./DisplayRouteComponents/GroupArticleCard";
-import ErrorTopicPage from "./DisplayRouteComponents/ErrorTopicPage";
+import { getAllArticles, getAllTopics } from "../../../lib/axios";
+import ArticleSortingBar from "./TopicComponents/ArticleSortingBar";
+import GroupArticleCard from "./TopicComponents/GroupArticleCard";
+import ErrorTopicPage from "../ErrorPages/ErrorTopicPage";
 
 
 export default function Topic() {
@@ -53,15 +53,9 @@ export default function Topic() {
         )
     }
 
-        
-    
-
     if(!articlesToDisplay.length)  <p>No articles to display under topic {selectedTopic}</p>
-       
-    
 
     return (
-
         <>
         {
             isLoading ? 
@@ -70,13 +64,10 @@ export default function Topic() {
         }
         <ArticleSortingBar
             setSortBy={setSortBy}
-            setOrderBy={setOrderBy}
-            isLoading={isLoading}/>
+            setOrderBy={setOrderBy}/>
         <div className="displayArticlesByTopics">
             <GroupArticleCard articlesToDisplay={articlesToDisplay}/>
         </div>
         </>
-        
-        
     )
 }

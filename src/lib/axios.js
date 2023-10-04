@@ -66,5 +66,13 @@ export function deleteComment(id) {
     return instance.delete(`/api/comments/${id}`)
 }
 
-
-
+export function patchCommentByVote(comment_id, upvote, twice) {
+    console.log(comment_id)
+    const val = twice ? 2 : 1;
+    const updatedData = upvote ? {inc_votes: val} : {inc_votes: -val};
+    return instance.patch(`/api/comments/${comment_id}`, updatedData)
+    .then(({data}) => {
+        return data
+    })
+    
+}

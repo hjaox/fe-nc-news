@@ -1,5 +1,5 @@
 export default function Header() {
     return (
-        <h1>NC NEWS</h1>
+        <h1>NC News</h1>
     )
 }

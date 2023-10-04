@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { getAllUsers } from "./DisplayRoutes/axios"
+import { getAllUsers } from "../lib/axios"
 import { UserContext } from "../context/User"
 import Dropdown from 'react-bootstrap/Dropdown'
 
@@ -20,9 +20,11 @@ export default function Settings() {
 
     return (
         <Dropdown>
-            <span className="currentUser">{username}</span>
+            <span className="currentUser">Welcome {username}</span>
             <Dropdown.Toggle>
-                <div className="dropdown-toggle">test</div>
+                <div className="menu-line"></div>
+                <div className="menu-line"></div>
+                <div className="menu-line"></div>
             </Dropdown.Toggle>
     
             <Dropdown.Menu className="users-dropdown-menu">

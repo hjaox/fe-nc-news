@@ -1,21 +1,18 @@
 import { Routes, Route } from 'react-router-dom'
-import Article from './DisplayRoutes/Article'
-import Topic from './DisplayRoutes/Topic'
-import ErrorPage from './DisplayRoutes/DisplayRouteComponents/ErrorPage'
-import ErrorArticlePage from './DisplayRoutes/DisplayRouteComponents/ErrorArticlePage'
-import Test from './DisplayRoutes/DisplayRouteComponents/Test'
+import Article from './DisplayComponents/SingleArticle/Article'
+import Topic from './DisplayComponents/GroupArticle/Topic'
+import ErrorPage from './DisplayComponents/ErrorPages/ErrorPage'
+import ErrorArticlePage from './DisplayComponents/ErrorPages/ErrorArticlePage'
 
 export default function DisplayRouter() {
     return (
         <>
-        Display Router
         <Routes>
             <Route path='/' element={<Topic />}/>
             <Route path='/:selectedTopic' element={<Topic />}/>
             <Route path='/articles/:article_id' element={<Article />}/>
             <Route path='/*' element={<ErrorPage />}/>
             <Route path='/articles/*' element={<ErrorArticlePage />}/>
-            <Route path='/test' element={<Test />}/>
             <Route/>
         </Routes>
         </>

@@ -12,12 +12,12 @@ export default function SingleArticleCard({ article }) {
       for (const [key, value] of Object.entries(article)) {
         obj[key] = value;
       }
-      return obj;
-    });
+      return obj
+    })
   }, [article]);
 
 
-  
+  console.log('here')
 
   return (
     <div key={articleToDisplay.article_id} className="article">
@@ -37,7 +37,7 @@ export default function SingleArticleCard({ article }) {
       votes={articleToDisplay.votes}
       />
 
-      <span className="articleCommentCount">Comment_count: {articleToDisplay.comment_count}</span>
+      <span className="articleCommentCount">Comment: {articleToDisplay.comment_count}</span>
 
     </div>
   );

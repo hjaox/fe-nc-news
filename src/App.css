@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 428px) { */
   body {
     display: flex;
     justify-content: center;
@@ -12,45 +12,146 @@
 
   #root {
     display: grid;
+    width: 100%;
     grid-template-areas:
     'header settings'
-    'main main';
-    width: 100%;
-    align-items: center;
-    grid-template-columns: 3fr 1fr;
+    'border1 border1'
+    'topicsbar customsearchbar'
+    'border2 border2'
+    'displayrouter displayrouter';
+    grid-template-rows: 2.5rem auto 2.3rem auto;
+    grid-template-columns: 2fr 3fr;
+    background-color: red;
+    position: relative;
   }
+
+  /* ------------------------------ header ---------------------------- */
 
   header {
-    grid-area: header;
+    display: flex;
+    color: white;
+    padding-left: 0.5rem;
+    position: sticky;
+    top: 0px;
+    font-size: 0.8rem;
+    align-items: center;
   }
 
-  main {
-    grid-area: main;
+  /*----------------------------- settings ---------------------------*/
+  .settings {
+    grid-area: settings;
+    display: flex;
+    justify-self: right;
+    color: white;
+  }
+
+  .settings .dropdown {
     display: grid;
-    width: 100%;
-    height: 100%;
-    gap: 10px;
-    grid-template-columns: 2fr 10fr;
-    grid-template-rows: 30px auto;
     grid-template-areas:
-    'topicsbar customsearchbar'
-    'displayrouter displayrouter';
+    'currentUser dropdown-toggle' ;
+    gap: 1rem;
   }
 
-  .customsearchbar {
-    grid-area: customsearchbar;
+  .settings .dropdown .currentUser {
+    grid-area: currentUser;
+    margin: auto;
+  } 
+
+  .settings .dropdown .dropdown-toggle {
+    grid-area: dropdown-toggle;
+    width: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: .2rem;
+    position: relative;
+    background-color: inherit;
+  }
+
+  .settings .dropdown-toggle .menu-line {
+    border: 1px solid;
+    width: 70%;
+    color: white;
+  }
+
+  .users-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    padding: 1rem;
+    gap: 0.5rem;
+    z-index: 1;
+  }
+
+  .users-dropdown-menu .dropdown-item {
+    color: white;
+    text-decoration: none;
+  }
+
+  .dropdown .users-dropdown-menu {
+    visibility: hidden;
+  }
+
+  .show .users-dropdown-menu {
+    visibility: visible;
+  }
+
+  /* -------------------------------- border ----------------------------- */
+  .border1,
+  .border2{
+    border: 1px solid;
+    border-color: rgb(138, 101, 101);
+  }
+
+  .border1 {
+    grid-area: border1;
+  }
+
+  .border2 {
+    grid-area: border2;
   }
 
   /*----------------- topicsbar -------------------*/
 
   .topicsbar {
+    padding: 0.2rem;
     grid-area: topicsbar;
+    display: flex;
+    height: 80%;
+    align-self: center;
+  }
+
+  .topicsbar .dropdown-toggle {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.6rem;
+    padding: 0.2rem;
+    background-color: red;
+    color: white;
+    min-width: 7rem;
+    
   }
 
   .topics-dropdown-menu {
     display: flex;
     flex-direction: column;
     background-color: white;
+    z-index: 1;
+    gap: 0.5rem;
+    align-items: center;
+    background-color: red;
+    padding: 1rem;
+    position: absolute;
+  }
+
+  .topics-dropdown-menu .dropdown-item {
+    color: white;
+    text-decoration: none;
   }
 
   .dropdown .topics-dropdown-menu {
@@ -59,216 +160,46 @@
 
   .show .topics-dropdown-menu {
     visibility: visible;
+    width: 100%;
+    height: 100%;
   }
 
-  /*----------------- displayRouter -------------------*/
+  /* ------------------------------customSearchForm------------------ */
+  .customsearchbar {
+    grid-area: customsearchbar;
+    display: flex;
+  }
+
+  .customSearchForm {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .customSearchForm label {
+    display: inline-block;
+    color: white;
+  }
+
+  .customSearchForm input {
+    width: 20%;
+  }
+
+  /*------------------------------------ displayRouter -------------------*/
   .displayrouter {
     grid-area: displayrouter;
-  }
-
-  /*----------------- displayRouter-allArticles -------------------*/
-  .displayAllArticles {
-    width: 100%;
-    gap: 20px;
     display: flex;
     flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.1rem 0;
+    background-color: rgb(201, 199, 199);
   }
 
-  .displayAllArticles .article {
-    padding: 5%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: 4fr 1fr 1fr;
-    grid-template-areas:
-    'articleTitle articleTitle articleImg'
-    'articleAuthor articleAuthor articleImg'
-    'articleVotes articleCommentCount articleImg';
-    gap: 10px;
-  }
-
-  .displayAllArticles .articleTitle {
-    grid-area: articleTitle;
-  }
-
-  .displayAllArticles .articleImg {
-    grid-area: articleImg;
-    width: 100%;
-    height: 100%;
-    padding: 5%;
-  }
-
-  .displayAllArticles .articleAuthor {
-    grid-area: articleAuthor
-  }
-
-  .displayAllArticles .articleVotes {
-    grid-area: articleVotes;
-  }
-
-  .displayAllArticles .articleCommentCount {
-    grid-area: articleCommentCount
-  }
-  /* ----------------------displayRouter-ArticlesByTopic------------- */
-  .displayArticlesByTopics {
-    width: 100%;
-    gap: 20px;
+   /* -----------articleSortingBar----------- */
+   .articleSortingBar {
     display: flex;
-    flex-direction: column;
-  }
-
-  .displayArticlesByTopics .article {
-    padding: 5%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: 4fr 1fr 1fr;
-    grid-template-areas:
-    'articleTitle articleTitle articleImg'
-    'articleAuthor articleAuthor articleImg'
-    'articleVotes articleCommentCount articleImg';
-    gap: 10px;
-  }
-
-  .displayArticlesByTopics .articleTitle {
-    grid-area: articleTitle;
-  }
-
-  .displayArticlesByTopics .articleImg {
-    grid-area: articleImg;
-    width: 100%;
-    height: 100%;
-    padding: 5%;
-  }
-
-  .displayArticlesByTopics .articleAuthor {
-    grid-area: articleAuthor
-  }
-
-  .displayArticlesByTopics .articleVotes {
-    grid-area: articleVotes;
-  }
-
-  .displayArticlesByTopics .articleCommentCount {
-    grid-area: articleCommentCount
-  }
-  /*----------------- displayRouter-singleArticle -------------------*/
-
-  .displaySingleArticle {
-    width: 100%;
-    gap: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .displaySingleArticle .commentForm {
-    display: grid;
-    gap: 0.5rem;
-  }
-
-  .displaySingleArticle .commentForm .commentFormBody{
-    min-height: 3rem;
-    border: solid;
-  }
-
-  .displaySingleArticle .article {
-    padding: 5%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: 2fr 1fr auto 1fr;
-    grid-template-areas:
-    'articleTitle articleTitle articleImg'
-    'articleAuthor articleAuthor articleImg'
-    'articleBody articleBody articleBody'
-    'articleVotes articleVotes articleCommentCount';
-    gap: 10px;
-  }  
-
-  .displaySingleArticle .comment {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-    'commentAuthor commentCreatedAt'
-    'commentBody commentBody'
-    'commentVotes commentVotes';
-    gap: 10px;
-  }
-
-
-  .displaySingleArticle .articleTitle {
-    grid-area: articleTitle;
-  }
-
-  .displaySingleArticle .articleImg {
-    grid-area: articleImg;
-    width: 100%;
-    height: 100%;
-    padding: 5%;
-  }
-
-  .displaySingleArticle .articleAuthor {
-    grid-area: articleAuthor
-  }
-
-  .displaySingleArticle .articleVotes {
-    grid-area: articleVotes;
-  }
-
-  .displaySingleArticle .articleCommentCount {
-    grid-area: articleCommentCount
-  }
-
-  .displaySingleArticle .articleBody {
-    grid-area: articleBody;
-    margin: 2rem 0px;
-  }
-
-  .displaySingleArticle .articleVotes {
-    display: grid;
-    grid-template-areas:
-    'upVoteBtn voteCount downVoteBtn';
-    grid-column: 1fr 1fr 1fr;
-  }
-
-  .displaySingleArticle .articleCommentCount {
-    margin: auto;
-  }
-
-
-  .displaySingleArticle .upVoteBtn {
-    grid-area: upVoteBtn;
-  }
-
-  .displaySingleArticle .downVoteBtn {
-    grid-area: downVoteBtn;
-  }
-
-  .displaySingleArticle .voteCount {
-    grid-area: voteCount;
-    margin: auto;
-  }
-
-  .displaySingleArticle button.active {
-    background-color: red
-  }
-  
-  .displaySingleArticle .comment .commentAuthor {
-    grid-area: commentAuthor;
-  }
-  
-  .displaySingleArticle .comment .commentCreatedAt {
-    grid-area: commentCreatedAt;
-    justify-self: right;
-  }
-  
-  .displaySingleArticle .comment .commentBody {
-    grid-area: commentBody;
-  }
-  
-  .displaySingleArticle .comment .commentVotes {
-    grid-area: commentVotes;
-  }
-  /* -----------articleSortingBar----------- */
-  .articleSortingBar {
-    display: flex;
+    padding-left: 0.5rem;
   }
 
   .articleSortingBar .dropdown {
@@ -312,127 +243,217 @@
     visibility: visible;
   }
 
-
-
-  /*----------------- settings -------------------*/
-  .settings {
-    grid-area: settings;
-    height: 100%;
-  }
-
-  .settings .dropdown {
-    height: 100%;
-  }
-
-  .settings.users-dropdown-menu {
+  /* ----------------------displayRouter-ArticlesByTopic------------- */
+  .displayArticlesByTopics {
+    width: 100%;
+    gap: 0.5rem;
     display: flex;
     flex-direction: column;
+  }
+
+  .displayArticlesByTopics .article {
+    padding: 2%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: fit-content 1fr 1fr;
+    grid-template-areas:
+    'articleTitle articleTitle articleImg'
+    'articleAuthor articleAuthor articleAuthor'
+    'articleVotes articleCommentCount articleDate';
+    gap: 0.5rem;
     background-color: white;
   }
 
-  .settings .dropdown .users-dropdown-menu {
-    visibility: hidden;
+  .displayArticlesByTopics .articleTitle {
+    font-size: 1rem;
+    grid-area: articleTitle;
   }
 
-  .settings  .show .users-dropdown-menu {
-    visibility: visible;
+  .displayArticlesByTopics .articleImg {
+    grid-area: articleImg;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
-  /* .topics-dropdown-menu {
+
+  .displayArticlesByTopics .articleAuthor {
+    grid-area: articleAuthor;
+    font-size: 0.8rem;
+  }
+
+  .displayArticlesByTopics .articleVotes {
+    grid-area: articleVotes;
+    font-size: 0.8rem;
+  }
+
+  .displayArticlesByTopics .articleCommentCount {
+    grid-area: articleCommentCount;
+    font-size: 0.8rem;
+  }
+
+  .displayArticlesByTopics .articleDate {
+    grid-area: articleDate;
+    font-size: 0.8rem;
+    margin-left: auto;
+  }
+  /*----------------- displayRouter-singleArticle -------------------*/
+
+  .displaySingleArticle {
+    width: 100%;
+    gap: 0.3rem;
     display: flex;
     flex-direction: column;
+  }
+
+  .displaySingleArticle .article {
+    padding: 2%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto 1rem;
+    grid-template-areas:
+    'articleTitle articleTitle articleTitle'
+    'articleAuthor articleAuthor articleAuthor'
+    'articleImg articleImg articleImg'
+    'articleBody articleBody articleBody'
+    'articleVotes _ articleCommentCount';
     background-color: white;
+  } 
+
+  .displaySingleArticle .articleTitle {
+    grid-area: articleTitle;
   }
 
-  .dropdown .topics-dropdown-menu {
-    visibility: hidden;
+  .displaySingleArticle .articleImg {
+    grid-area: articleImg;
+    width: 100%;
+    height: 100%;
+    padding: 5%;
   }
 
-  .show .topics-dropdown-menu {
-    visibility: visible;
-  } */
-} 
+  .displaySingleArticle .articleAuthor {
+    grid-area: articleAuthor
+  }
+
+  .displaySingleArticle .articleVotes {
+    grid-area: articleVotes;
+  }
+
+
+
+  .displaySingleArticle .articleBody {
+    grid-area: articleBody;
+    margin-bottom: 1rem;
+  }
+
+  .displaySingleArticle .articleVotes {
+    display: grid;
+    grid-template-areas:
+    'upVoteBtn voteCount downVoteBtn';
+    grid-column: 1fr 1fr 1fr;
+  }
+
+  .displaySingleArticle .articleCommentCount {
+    margin: auto;
+  }
+
+
+  .displaySingleArticle .upVoteBtn {
+    grid-area: upVoteBtn;
+  }
+
+  .displaySingleArticle .downVoteBtn {
+    grid-area: downVoteBtn;
+  }
+
+  .displaySingleArticle .voteCount {
+    grid-area: voteCount;
+    margin: auto;
+  }
+
+  .displaySingleArticle button.active {
+    background-color: red
+  }
+
+  /* ----------------------------comments---------------------- */
+  .displaySingleArticle .comments {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .displaySingleArticle .commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    align-items: center;
+  }
+
+  .displaySingleArticle .commentForm .commentFormBody{
+    min-height: 3rem;
+    width: 100%;
+    border: 1px solid;
+  }
+
+  .displaySingleArticle .commentForm .submitButton{
+    width: 50%;
+    height: 1.5rem;
+    border-radius: 2rem;
+  }
+
+  .displaySingleArticle .comment {
+    display: grid;
+    grid-template-columns: 6rem auto 1fr;
+    grid-template-areas:
+    'commentAuthor commentAuthor commentCreatedAt'
+    'commentBody commentBody commentBody'
+    'commentVotes _ _';
+    gap: 0.5rem;
+    background-color: white;
+    padding: 1%;
+  }
+
+  .displaySingleArticle .comment .commentVotes {
+    grid-area: commentVotes;
+    display: flex;
+  }
+
+  .displaySingleArticle .comment .upVoteBtn,
+  .displaySingleArticle .comment .downVoteBtn,
+  .displaySingleArticle .comment .voteCount {
+    width: 2rem;
+  }
+
+  .displaySingleArticle .comment .voteCount {
+    text-align: center;
+  }
+
+  .displaySingleArticle .articleCommentCount {
+    grid-area: articleCommentCount
+  }
+
+  .displaySingleArticle .comment .commentAuthor {
+    grid-area: commentAuthor;
+  }
+  
+  .displaySingleArticle .comment .commentCreatedAt {
+    grid-area: commentCreatedAt;
+    justify-self: right;
+  }
+  
+  .displaySingleArticle .comment .commentBody {
+    grid-area: commentBody;
+  }
+  
+  
+
+/* } 
 /* end of media screen */
 
-
+/* @media screen and (min-width: 429px) {
+  body {
+    display: flex;
+    background-color: white
+  }; */
+/* } */ 
 /* ---------------to delete after ------------------------*/
-.displayrouter {
-  border: solid;
-}
 
-.displayAllArticles {
-  border:solid;
-  border-color: green;
-}
-
-.displayAllArticles .article {
-  border: solid;
-  border-color: blue;
-}
-
-body {
-  border: solid;
-  border-color: red;
-}
-
-.displayAllArticles {
-  border:solid;
-  border-color: green;
-}
-
-.header {
-  border: solid;
-}
-
-.customsearchbar {
-  border: solid;
-}
-
-.topicsbar {
-  border: solid;
-}
-
-.displayrouter {
-  grid-area: displayrouter;
-  border: solid;
-}
-
-.settings {
-  border: solid;
-}
-
-.displayArticlesByTopics .article {
-  border: solid;
-  border-color: blue;
-}
-
-/* .displaySingleArticle .commentForm {
-  border: solid;
-} */
-
-/* .comment {
-  border: solid;
-  border-color: blue;
-} */
-
-/*
-.comment .commentAuthor {
-  border: solid;
-}
-
-.comment .commentCreatedAt {
-  border: solid;
-}
-
-.comment .commentBody {
-  border: solid;
-}
-
-.comment .commentVotes {
-  border: solid;
-}
-
-.displaySingleArticle .article {
-  border: solid;
-  width: 100%;
-  height: 100%;
-} */

@@ -9,24 +9,24 @@ function App() {
 
   return (
     <>
-      <header className='header'>
+      <header>
         <Header/>
       </header>
       <section className='settings'>
           <Settings/>
-        </section>
-      <main>
-        
-        <section className='customsearchbar'>
-          <CustomSearchBar/>
-        </section>
-        <section className='topicsbar'>
-          <TopicsBar/>
-        </section>
-        <section className='displayrouter'>
-          <DisplayRouter/>
-        </section>
-      </main>
+      </section>
+      <div className='border1'></div>
+      <section className='customsearchbar'>
+        <CustomSearchBar/>
+      </section>
+      <section className='topicsbar'>
+        <TopicsBar/>
+      </section>
+      <div className='border2'></div>
+      <section className='displayrouter'>
+        <DisplayRouter/>
+      </section>
+
     </>
     
   )

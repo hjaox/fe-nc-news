@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getArticle } from './axios';
-import SingleArticleCard from './DisplayRouteComponents/SingleArticleCard';
-import { getCommentsByArticleID } from './axios';
-import CommentCard from './DisplayRouteComponents/CommentCard';
-import { UserContext } from '../../context/User';
-import { postComment } from './axios';
-import { resetCommentForm } from './script';
-import ErrorArticlePage from './DisplayRouteComponents/ErrorArticlePage';
+import { getArticle } from '../../../lib/axios';
+import SingleArticleCard from './ArticleComponents/SingleArticleCard';
+import { getCommentsByArticleID } from '../../../lib/axios';
+import CommentCard from './ArticleComponents/CommentCard';
+import { UserContext } from '../../../context/User';
+import { postComment } from '../../../lib/axios';
+import { resetCommentForm } from '../../script';
+import ErrorArticlePage from '../ErrorPages/ErrorArticlePage';
 
 export default function Article() {
     const [articleToDisplay, setArticleToDisplay] = useState([]);
@@ -33,7 +33,6 @@ export default function Article() {
             if(err.response.status === 404) {
                 setArticleExists(false)
             }
-            
         })
         
     },[article_id])
@@ -70,15 +69,14 @@ export default function Article() {
 
     return (
         <div className='displaySingleArticle'>
-            Single Article Display
             {
                 isLoading ? (<p>LOADING...</p>) : ''
             }
             <SingleArticleCard article={articleToDisplay}/>
             <form className='commentForm' id='commentForm' onSubmit={(e) => handleSubmitForm(e)}>
-                <input type="text" id='commentFormBody' className='commentFormBody' onChange={(e) => handleCommentFormInput(e)}/>
+                <input type="text" id='commentFormBody' className='commentFormBody' onChange={(e) => handleCommentFormInput(e)} placeholder='Enter your comment'/>
                 {isPosting ? (<p>POSTING...</p>) : ''}
-                <button form='commentForm' type='submit'>Submit</button>
+                <button className='submitButton' form='commentForm' type='submit'>Submit</button>
             </form>
             <div className='comments'>
                 {
