@@ -1,52 +1,62 @@
 import { useEffect, useState } from "react"
-import Dropdown from 'react-bootstrap/Dropdown'
 import { useNavigate } from 'react-router-dom'
 import { getAllTopics } from "../lib/axios";
 
 export default function TopicsBar() {
     const [selectedTopic, setSelectedTopic] = useState('All');
-    const [topicsArr, setTopicsArr] = useState([]);
+    const [allTopics, setAllTopics] = useState([]);
+    const [showTopicsMenu, setShowTopicsMenu] = useState(false)
     const nav = useNavigate();
 
     useEffect(() => {
         getAllTopics()
         .then(data => {
             const topics = data.map(topic => topic.slug)
-            handleTopicsDisplay(topics)
+            setAllTopics(allTopics => ['All', ...topics])
         })
         .catch((err) => {
             alert('Server Error in fetching topics')
         })
     },[])
 
-    function handleTopicsDisplay(topics) {
-        setTopicsArr(topics.map(topic => {
-            return (
-                <Dropdown.Item key={`topic-${topic}`} onClick={() => handleTopic(topic)}>
-                    {topic}
-                </Dropdown.Item>
-            )
-        }))
-    }
-
     function handleTopic(topic) {
         setSelectedTopic(topic)
         nav(`/${topic}`)
     }
 
+    function handleShowTopicsMenu() {
+        setShowTopicsMenu(showTopicsMenu => !showTopicsMenu)
+    }
+
+    function displayAllTopics(topics) {
+        return (
+            <>
+            {
+                topics.map((topic, i) => {
+                    return (
+                        <span key={i} onClick={() => handleTopic(topic)}>
+                            {topic}
+                        </span>
+                    )
+                })
+            }
+            </>
+        )
+    }
 
     return (
-        <Dropdown >
-            <Dropdown.Toggle>
-                Topic:{selectedTopic}
-            </Dropdown.Toggle>
-    
-            <Dropdown.Menu className="topics-dropdown-menu">
-                <Dropdown.Item key="topic-All" onClick={() => handleTopic('All')}>
-                    All
-                </Dropdown.Item>
-                {topicsArr}
-            </Dropdown.Menu>
-        </Dropdown>
+        <>
+        <div className="topicsBar__dropdown" onClick={() => handleShowTopicsMenu()}>
+            <span className="selectedTopic">
+                Topic: {selectedTopic}
+            </span>
+            <div className="topicsBar__dropdown__menu">
+            {
+                showTopicsMenu && (displayAllTopics(allTopics))
+            }
+            </div>
+        </div>
+        
+        </>
     )
 }
