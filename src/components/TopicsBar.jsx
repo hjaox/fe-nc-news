@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import { getAllTopics } from "../lib/axios";
+import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai'
 
 export default function TopicsBar() {
     const [selectedTopic, setSelectedTopic] = useState('All');
@@ -16,6 +17,12 @@ export default function TopicsBar() {
         })
         .catch((err) => {
             alert('Server Error in fetching topics')
+        })
+
+        window.addEventListener('click', e => {
+            if(Object.values(e.target.classList).filter(item => !['topicsBar', 'topicsBar__dropdown', 'selectedTopic'].includes(item)).length) {
+                setShowTopicsMenu(showTopicsMenu => false)
+            }
         })
     },[])
 
@@ -45,18 +52,28 @@ export default function TopicsBar() {
     }
 
     return (
-        <>
-        <div className="topicsBar__dropdown" onClick={() => handleShowTopicsMenu()}>
+        <section
+        className={showTopicsMenu ? 'topicsBar--expanded' : 'topicsBar'}
+        onClick={() => handleShowTopicsMenu()}>
+        <div className="topicsBar__dropdown" >
             <span className="selectedTopic">
                 Topic: {selectedTopic}
             </span>
-            <div className="topicsBar__dropdown__menu">
             {
-                showTopicsMenu && (displayAllTopics(allTopics))
+                showTopicsMenu ? (
+                    <AiFillCaretUp/>
+                ) : (
+                    <AiFillCaretDown/>
+                )
             }
-            </div>
         </div>
-        
-        </>
+            {
+                showTopicsMenu && (
+                    <div className="topicsBar__dropdown__menu">
+                    {displayAllTopics(allTopics)}
+                    </div>
+                    )
+            }
+        </section>
     )
 }

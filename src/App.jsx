@@ -12,15 +12,13 @@ function App() {
       <header className='header'>
         <Header/>
       </header>
-      <section className='settings'>
+      
           <Settings/>
-      </section>
+      
       <section className='customSearchBar'>
         <CustomSearchBar/>
       </section>
-      <section className='topicsBar'>
         <TopicsBar/>
-      </section>
       <section className='displayRouter'>
         <DisplayRouter/>
       </section>

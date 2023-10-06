@@ -9,6 +9,7 @@ import { postComment } from '../../../lib/axios';
 import { resetCommentForm } from '../../script';
 import ErrorArticlePage from '../ErrorPages/ErrorArticlePage';
 
+
 export default function Article() {
     const [articleToDisplay, setArticleToDisplay] = useState([]);
     const [commentsToDisplay, setCommentsToDisplay] = useState([]);

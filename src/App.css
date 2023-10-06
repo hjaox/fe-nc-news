@@ -5,7 +5,7 @@
 }
 
 #root {
-  background-color: red; /*temp*/
+  background-color: white;
   display: grid;
   grid-template-areas:
   'header topicsBar customSearchBar settings'
@@ -14,49 +14,115 @@
 }
 
 .header {
-  background-color: green; /*temp*/
+  background-color: white;
   grid-area: header;
   padding-left: 5%;
   width: auto;
   white-space: nowrap;
+  color: red;
 }
 
 .topicsBar {
-  background-color: yellow; /*temp*/
   grid-area: topicsBar;
-  display: flex;
-  justify-content: center;
+  display: inline-block;
   align-items: center;
+  color: black;
+  position: relative;
+  margin: auto;
+  white-space: nowrap;
+  width: 60%;
+  border: 1px solid;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+  cursor: pointer;
+  border-radius: 0.3rem;
+}
+
+.topicsBar--expanded {
+  grid-area: topicsBar;
+  display: inline-block;
+  align-items: center;
+  color: black;
+  position: relative;
+  margin: auto;
+  white-space: nowrap;
+  width: 60%;
+  border: 1px solid;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+  cursor: pointer;
+  border-radius: 0.3rem 0.3rem 0 0;
 }
 
 .topicsBar__dropdown {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  background-color: red;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5%;
 }
 
+.topicsBar:hover {
+  border-color: black;
+}
 
 .topicsBar__dropdown__menu {
   position: absolute;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: white;
-  width: 100%;
+  padding-left: 5%;
+  left: -1px;
+  right: -1px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  border-left: 1px solid;
+  border-radius: 0 0 0.3rem 0.3rem;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
 }
 
 .customSearchBar {
-  background-color: blue; /*temp*/
+  background-color: white;
   grid-area: customSearchBar;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.searchInput {
-  appearance: none;
+.customSearchBar .customSearchForm {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.customSearchBar .customSearchForm button {
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.3rem;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+}
+
+#searchInput {
+  flex: 1;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 0.3rem;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+}
+
+#searchInput:hover {
+  border-color: blue;
+}
+
+#searchInput:focus {
+  border-color: blue;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .settings {
@@ -65,6 +131,7 @@
   display: block;
   margin-top: auto;
   margin-bottom: auto;
+  
 }
 
 .settings__dropdown {
@@ -73,9 +140,45 @@
   'currentUser settings__dropdown--open settings__dropdown--closed'
   'settings__dropdown__menu settings__dropdown__menu settings__dropdown__menu';
   justify-content: right;
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  border: 1px solid;
+  border-radius: 0.3rem;
+  padding-left: 5%;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+}
+
+.settings__dropdown--expanded {
+  display: grid;
+  grid-template-areas:
+  'currentUser settings__dropdown--open settings__dropdown--closed'
+  'settings__dropdown__menu settings__dropdown__menu settings__dropdown__menu';
+  justify-content: right;
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  border: 1px solid;
+  border-bottom-color: white ;
+  border-radius: 0.3rem 0.3rem 0 0;
+  padding-left: 5%;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+}
+
+.settings__dropdown:hover {
+  border-color: black;
 }
 
 .settings__dropdown .currentUser {
+  grid-area: currentUser;
+  margin-right: 1rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.settings__dropdown--expanded .currentUser {
   grid-area: currentUser;
   margin-right: 1rem;
   margin-top: auto;
@@ -87,7 +190,6 @@
   display: flex;
   flex-direction: column;
   height: 1.5rem;
-  border: solid;
   width: 1.5rem;
   justify-content: space-evenly;
   padding: 10%;
@@ -98,7 +200,6 @@
   display: flex;
   flex-direction: column;
   height: 1.5rem;
-  border: solid;
   width: 1.5rem;
   padding: 10%;
   position: relative;
@@ -129,6 +230,16 @@
   right: 0px;
   display: flex;
   flex-direction: column;
+  top: 24px;
+  left: -1px;
+  right: -1px;
+  padding-left: 10%;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  border-radius: 0 0 0.3rem 0.3rem;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
 }
 
 .displayRouter {
