@@ -12,12 +12,12 @@ export default function GroupArticleCard({articlesToDisplay}) {
         {
             articlesToDisplay.map(article => {
                 return (
-                    <div key={article.article_id} className='article'>
+                <div key={article.article_id} className='article'>
                     <h3 className="articleTitle" onClick={()=> handleTitleClick(article.article_id)}>
                         {article.article_id}# {article.title}
                     </h3>
                     <img className="articleImg" src={article.article_img_url} alt="article-img" />
-                    <h4 className="articleAuthor">By {article.author}</h4>
+                    <h4 className="articleAuthor">Posted By: {article.author}</h4>
                     <span className="articleVotes">
                         Votes {article.votes}
                     </span>

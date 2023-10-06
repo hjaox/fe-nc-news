@@ -136,10 +136,10 @@
   grid-area: displayRouter;
   display: flex;
   flex-direction: column;
-  margin: 0 20%
 }
 
 .articleSortingBar {
+  padding-left: 30%;
   padding-top: 1%;
 }
 
@@ -155,4 +155,146 @@
 
 .articleSortingBar {
   display: block;
+}
+
+.displayArticlesByTopics {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 30%;
+}
+
+.displayArticlesByTopics .article {
+  border: solid;
+  display: grid;
+  grid-template-areas:
+  'articleAuthor articleAuthor articleAuthor'
+  'articleTitle  articleTitle  articleTitle '
+  'articleImg articleImg articleImg'
+  'articleVotes articleCommentCount articleDate';
+  padding: 1% 10%;
+}
+
+.displayArticlesByTopics .article .articleTitle {
+  grid-area: articleTitle;
+}
+
+.displayArticlesByTopics .article .articleImg {
+  grid-area: articleImg;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1% 5%
+}
+
+.displayArticlesByTopics .article .articleAuthor {
+  grid-area: articleAuthor;
+}
+
+.displayArticlesByTopics .article .articleVotes {
+  grid-area: articleVotes;
+}
+
+.displayArticlesByTopics .article .articleCommentCount {
+  grid-area: articleCommentCount;
+}
+
+.displayArticlesByTopics .article .articleDate {
+  grid-area: articleDate;
+  white-space: nowrap;
+}
+
+.displaySingleArticle {
+  display: flex;
+  flex-direction: column;
+  padding: 1% 30%;
+  gap: 1rem;
+}
+
+.displaySingleArticle .article {
+  display: grid;
+  grid-template-areas:
+  'singleArticleAuthor singleArticleAuthor'
+  'singleArticleTitle singleArticleTitle'
+  'singleArticleImg singleArticleImg'
+  'singleArticleBody singleArticleBody'
+  'singleArticleVotes singleArticleCommentCount';
+  gap: 0.5%;
+}
+
+.displaySingleArticle .article .articleTitle {
+  grid-area: singleArticleTitle
+}
+
+.displaySingleArticle .article .articleImg {
+  grid-area: singleArticleImg;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1% 5%
+}
+
+.displaySingleArticle .article .articleAuthor {
+  grid-area: singleArticleAuthor
+}
+
+.displaySingleArticle .article .articleBody {
+  grid-area: singleArticleBody
+}
+
+.displaySingleArticle .article .articleCommentCount {
+  grid-area: singleArticleCommentCount
+}
+
+.displaySingleArticle .article .articleVotes {
+  grid-area: singleArticleVotes;
+  display: flex;
+  gap: 0.5rem
+}
+
+.displaySingleArticle .commentForm{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  gap: 0.1rem;
+  align-items: center;
+}
+
+.displaySingleArticle .commentFormBody{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 4rem;
+}
+
+.displaySingleArticle .submitButton {
+  width: 20%;
+}
+
+.displaySingleArticle .comment {
+  display: grid;
+  grid-template-areas:
+  'commentAuthor commentAuthor'
+  'commentBody commentBody'
+  'commentVotes commentCreatedAt';
+  border: solid;
+
+}
+
+.displaySingleArticle .comment .commentAuthor {
+  grid-area: commentAuthor
+}
+
+.displaySingleArticle .comment .commentCreatedAt {
+  grid-area: commentCreatedAt
+}
+
+.displaySingleArticle .comment .commentBody {
+  grid-area: commentBody
+}
+
+.displaySingleArticle .comment .commentVotes {
+  grid-area: commentVotes;
+  display: flex;
 }

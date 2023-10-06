@@ -64,9 +64,7 @@ export default function Article() {
     function handleCommentFormInput(e) {
         setCommentFormBody(e.target.value)
     }
-
     
-
     return (
         <div className='displaySingleArticle'>
             {
@@ -74,7 +72,7 @@ export default function Article() {
             }
             <SingleArticleCard article={articleToDisplay}/>
             <form className='commentForm' id='commentForm' onSubmit={(e) => handleSubmitForm(e)}>
-                <input type="text" id='commentFormBody' className='commentFormBody' onChange={(e) => handleCommentFormInput(e)} placeholder='Enter your comment'/>
+                <input type="text" id='commentFormBody' className='commentFormBody' onChange={(e) => handleCommentFormInput(e)} placeholder='Enter your comment....'/>
                 {isPosting ? (<p>POSTING...</p>) : ''}
                 <button className='submitButton' form='commentForm' type='submit'>Submit</button>
             </form>

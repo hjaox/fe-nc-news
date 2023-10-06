@@ -60,7 +60,7 @@ export default function CommentCard({comment}) {
                             (<p>Deleting Comment......</p>)
                             :
                             (<span>
-                                <button className="submitButton" onClick={() => handleDeleteComment()}>delete</button>
+                                <button className="deleteButton" onClick={() => handleDeleteComment()}>delete</button>
                             </span>)
                         }
                         </>

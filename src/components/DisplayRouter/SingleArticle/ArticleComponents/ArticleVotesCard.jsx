@@ -86,15 +86,15 @@ export default function ArticleVotesCard({votes, article_id}) {
 
     return (
         <span className="articleVotes">
-        <div className="voteCount">
-          {voteCount}
-        </div>
         <button
           className={`upVoteBtn ${isUpVoted ? "active" : ""}`}
           onClick={() => handleUpVote()}
         >
           ↑
         </button>
+        <div className="voteCount">
+          {voteCount}
+        </div>
         <button
           className={`downVoteBtn ${isDownVoted ? "active" : ""}`}
           onClick={() => handleDownVote()}

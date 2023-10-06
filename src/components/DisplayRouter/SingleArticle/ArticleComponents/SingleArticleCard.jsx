@@ -28,7 +28,7 @@ export default function SingleArticleCard({ article }) {
 
       <img className="articleImg" src={articleToDisplay.article_img_url} alt="article-img" />
 
-      <h5 className="articleAuthor">By: {articleToDisplay.author}</h5>
+      <h5 className="articleAuthor">Posted By: {articleToDisplay.author}</h5>
 
       <p className="articleBody">{articleToDisplay.body}</p>
 
