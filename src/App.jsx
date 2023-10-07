@@ -12,9 +12,7 @@ function App() {
       <header className='header'>
         <Header/>
       </header>
-      
           <Settings/>
-      
       <section className='customSearchBar'>
         <CustomSearchBar/>
       </section>
@@ -22,7 +20,6 @@ function App() {
       <section className='displayRouter'>
         <DisplayRouter/>
       </section>
-
     </>
     
   )

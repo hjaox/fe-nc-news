@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ArticleVotesCard from "./ArticleVotesCard";
+import { BiCommentDetail } from 'react-icons/bi'
 
 
 export default function SingleArticleCard({ article }) {
@@ -37,7 +38,9 @@ export default function SingleArticleCard({ article }) {
       votes={articleToDisplay.votes}
       />
 
-      <span className="articleCommentCount">Comment: {articleToDisplay.comment_count}</span>
+      <span className="articleCommentCount">
+        <BiCommentDetail/> {articleToDisplay.comment_count} Comments
+      </span>
 
     </div>
   );

@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { FcLike } from 'react-icons/fc'
+import { BiCommentDetail } from 'react-icons/bi'
 
 export default function GroupArticleCard({articlesToDisplay}) {
     const nav = useNavigate()
@@ -19,10 +21,10 @@ export default function GroupArticleCard({articlesToDisplay}) {
                     <img className="articleImg" src={article.article_img_url} alt="article-img" />
                     <h4 className="articleAuthor">Posted By: {article.author}</h4>
                     <span className="articleVotes">
-                        Votes {article.votes}
+                        <FcLike/> {article.votes} Likes
                     </span>
                     <span className="articleCommentCount">
-                        Comments {article.comment_count}
+                        <BiCommentDetail/> {article.comment_count} Comments
                     </span>
                     <span className="articleDate">
                         {new Date(article.created_at).toDateString()}

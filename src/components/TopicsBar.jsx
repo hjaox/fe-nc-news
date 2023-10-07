@@ -41,7 +41,7 @@ export default function TopicsBar() {
             {
                 topics.map((topic, i) => {
                     return (
-                        <span key={i} onClick={() => handleTopic(topic)}>
+                        <span key={i} className="topic__item" onClick={() => handleTopic(topic)}>
                             {topic}
                         </span>
                     )
@@ -52,9 +52,11 @@ export default function TopicsBar() {
     }
 
     return (
+        <div className="topicsBarWrapper">
         <section
         className={showTopicsMenu ? 'topicsBar--expanded' : 'topicsBar'}
         onClick={() => handleShowTopicsMenu()}>
+
         <div className="topicsBar__dropdown" >
             <span className="selectedTopic">
                 Topic: {selectedTopic}
@@ -75,5 +77,6 @@ export default function TopicsBar() {
                     )
             }
         </section>
+        </div>
     )
 }

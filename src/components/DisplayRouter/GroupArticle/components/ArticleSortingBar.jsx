@@ -1,6 +1,6 @@
-import Dropdown from 'react-bootstrap/Dropdown'
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import {RiArrowUpFill, RiArrowDownFill} from 'react-icons/ri'
 
 export default function ArticleSortingBar({setSortBy, setOrderBy}) {
     const [selectedSortBy, setSelectedSortBy] = useState('Date')
@@ -37,31 +37,37 @@ export default function ArticleSortingBar({setSortBy, setOrderBy}) {
 
     return (
         <div className='articleSortingBar'>
-            <div className='articleSortingBar__dropdown' onClick={() => setShowSortByMenu(showSortByMenu => !showSortByMenu)}>
-                <span className='selectedSortBy'>
+            <div className='articleSortingBar__dropdown'>
+                <span className={showSortByMenu ? 'selectedSortBy--expanded' : 'selectedSortBy'} onClick={() => setShowSortByMenu(showSortByMenu => !showSortByMenu)}>
                     {selectedSortBy}
+                    {
+                    showSortByMenu && (
+                        <div className='articleSortingBar__dropdown__menu'>
+                            {
+                                ['Date', 'Most Comments', 'Votes'].map((item, i) => {
+                                    return (
+                                        <span key={i} onClick={() => handleSelectedSortBy(item)}>
+                                            {item}
+                                        </span>
+                                    )
+                                })
+                            }
+                        </div>
+                    )
+                }
                 </span>
                 <div className='articleSortingBar__order'>
                     {
                         orderByAsc ? (
-                            <button className={`desc ${!orderByAsc ? 'active' : ''}`} onClick={() => handleOrderBy(false)}>↓</button>
+                            <RiArrowDownFill onClick={() => handleOrderBy(false)}/>
                         ) : (
-                            <button className={`asc ${orderByAsc ? 'active' : ''}`} onClick={() => handleOrderBy(true)}>↑</button>
+                            <RiArrowUpFill onClick={() => handleOrderBy(true)}/>
                         )
                     }
                 </div>
             </div>
-            <div className='articleSortingBar__dropdown__menu'>
-                {
-                    showSortByMenu && ['Date', 'Most Comments', 'Votes'].map((item, i) => {
-                        return (
-                            <span key={i} onClick={() => handleSelectedSortBy(item)}>
-                                {item}
-                            </span>
-                        )
-                    })
-                }
-            </div>
+            
+                
         </div>
     )
 }

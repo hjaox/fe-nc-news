@@ -12,6 +12,13 @@ export default function Settings() {
         .then(users => {
             setAllUsers(users)
         })
+
+        window.addEventListener('click', event => {
+            console.log(Object.values(event.target.classList))
+            if(Object.values(event.target.classList).filter(item => !['settings__dropdown--open', 'settings__dropdown--closed', 'settings__dropdown__menu__line--closed', 'settings__dropdown__menu__line--open'].includes(item)).length) {
+                setShowSettingsMenu(() => false)
+            }
+        })
     },[])
 
     function handleUsername(username) {
@@ -39,6 +46,7 @@ export default function Settings() {
     }
 
     return (
+        <div className="settingsWrapper">
         <section className='settings'>
             <div className={showSettingsMenu ? "settings__dropdown--expanded" : "settings__dropdown"}>
                 <span className="currentUser">
@@ -71,5 +79,6 @@ export default function Settings() {
                 }
             </div>
         </section>
+        </div>
     )
 }

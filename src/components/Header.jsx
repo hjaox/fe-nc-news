@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom"
+
 export default function Header() {
+    const nav = useNavigate()
     return (
-        <h1>NC News</h1>
+        <h1 onClick={() => nav(`/All`)}>NC News</h1>
     )
 }
