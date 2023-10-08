@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { getArticle } from '../../../lib/axios';
 import SingleArticleCard from './ArticleComponents/SingleArticleCard';
 import { getCommentsByArticleID } from '../../../lib/axios';
@@ -13,12 +13,13 @@ import ErrorArticlePage from '../ErrorPages/ErrorArticlePage';
 export default function Article() {
     const [articleToDisplay, setArticleToDisplay] = useState([]);
     const [commentsToDisplay, setCommentsToDisplay] = useState([]);
-    const [commentFormBody, setCommentFormBody] = useState('')
+    const [commentFormBody, setCommentFormBody] = useState('');
     const [isPosting, setIsPosting] = useState(false)
     const {article_id} = useParams();
     const {username} = useContext(UserContext);
     const [isLoading, setIsLoading] = useState(false);
-    const [articleExists, setArticleExists] = useState(true)
+    const [articleExists, setArticleExists] = useState(true);
+    const location = useLocation();
     
     useEffect(() => {
         setIsLoading(true)
@@ -29,14 +30,20 @@ export default function Article() {
             setCommentsToDisplay(comments)
             setIsLoading(false);
             resetCommentForm();
+
+            if(location.hash) {
+                const elem = document.getElementById(location.hash.slice(1))
+                elem ? elem.scrollIntoView({behavior: 'smooth'}) : window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
+            }
+
         })
         .catch(err => {
             if(err.response.status === 404) {
                 setArticleExists(false)
             }
         })
-        
-    },[article_id])
+    },[location])
+    
 
     if(!articleExists) {
         return (
@@ -77,7 +84,7 @@ export default function Article() {
                 {isPosting ? (<p>POSTING...</p>) : ''}
                 <button className='submitButton' form='commentForm' type='submit'>Submit</button>
             </form>
-            <div className='comments'>
+            <div className='comments' id='comments'>
                 {
                     commentsToDisplay.map(comment => {
                         return (

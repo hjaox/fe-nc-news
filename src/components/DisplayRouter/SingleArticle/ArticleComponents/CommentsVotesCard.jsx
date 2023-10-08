@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { patchCommentByVote } from "../../../../lib/axios";
+import { AiOutlineDislike,AiOutlineLike,AiFillLike,AiFillDislike } from 'react-icons/ai'
 
 export default function CommentsVotesCard({votes, comment_id}) {
     const [voteCount, setVoteCount] = useState(votes)
@@ -84,21 +85,27 @@ export default function CommentsVotesCard({votes, comment_id}) {
 
     return (
         <span className="commentVotes">        
-        <button
-          className={`upVoteBtn ${isUpVoted ? "active" : ""}`}
-          onClick={() => handleUpVote()}
-        >
-          ↑
-        </button>
+        {
+          isUpVoted ? (
+            <AiFillLike className='upVoteBtn--filled'
+            onClick={() => handleUpVote()}/>
+          ) : (
+            <AiOutlineLike className='upVoteBtn'
+            onClick={() => handleUpVote()}/>
+          )
+        }
         <div className="voteCount">
           {voteCount}
         </div>
-        <button
-          className={`downVoteBtn ${isDownVoted ? "active" : ""}`}
-          onClick={() => handleDownVote()}
-        >
-          ↓
-        </button>
+        {
+          isDownVoted ? (
+            <AiFillDislike className='downVoteBtn--filled'
+            onClick={() => handleDownVote()}/>
+          ) : (
+            <AiOutlineDislike className='downVoteBtn'
+            onClick={() => handleDownVote()}/>
+          )
+        }
       </span>
     )
 }

@@ -18,8 +18,6 @@ export default function SingleArticleCard({ article }) {
   }, [article]);
 
 
-  console.log('here')
-
   return (
     <div key={articleToDisplay.article_id} className="article">
 

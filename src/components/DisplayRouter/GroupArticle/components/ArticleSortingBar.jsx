@@ -14,6 +14,12 @@ export default function ArticleSortingBar({setSortBy, setOrderBy}) {
             setSortBy(checkSortVal(selectedSortBy))
         })
         handleSelectedSortBy(selectedSortBy)
+
+        window.addEventListener('click', event => {
+            if(Object.values(event.target.classList).filter(item => !['selectedSortBy--expanded', 'selectedSortBy'].includes(item)).length) {
+                setShowSortByMenu(() => false)
+            }
+        })
     }, [selectedSortBy])
 
     function handleSelectedSortBy(sortVal) {

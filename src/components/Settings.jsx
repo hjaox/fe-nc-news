@@ -14,7 +14,6 @@ export default function Settings() {
         })
 
         window.addEventListener('click', event => {
-            console.log(Object.values(event.target.classList))
             if(Object.values(event.target.classList).filter(item => !['settings__dropdown--open', 'settings__dropdown--closed', 'settings__dropdown__menu__line--closed', 'settings__dropdown__menu__line--open'].includes(item)).length) {
                 setShowSettingsMenu(() => false)
             }
