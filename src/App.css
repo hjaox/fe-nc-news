@@ -666,5 +666,20 @@ input::-webkit-inner-spin-button {
 
   .customSearchBar {
     top: 3rem;
+    z-index: 0;
+  }
+
+  .settingsWrapper {
+    z-index: 10;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .displayArticlesByTopics {
+    width: 100vw;
+  }
+
+  .articleSortingBar {
+    width: 100vw;
   }
 }
