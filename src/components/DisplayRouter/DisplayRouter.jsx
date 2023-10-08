@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
-import Article from './DisplayComponents/SingleArticle/Article'
-import Topic from './DisplayComponents/GroupArticle/Topic'
-import ErrorPage from './DisplayComponents/ErrorPages/ErrorPage'
-import ErrorArticlePage from './DisplayComponents/ErrorPages/ErrorArticlePage'
+import Article from './SingleArticle/Article'
+import Topic from './GroupArticle/Topic'
+import ErrorPage from './ErrorPages/ErrorPage'
+import ErrorArticlePage from './ErrorPages/ErrorArticlePage'
 
 export default function DisplayRouter() {
     return (

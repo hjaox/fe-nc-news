@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAllArticles, getAllTopics } from "../../../lib/axios";
-import ArticleSortingBar from "./TopicComponents/ArticleSortingBar";
-import GroupArticleCard from "./TopicComponents/GroupArticleCard";
+import ArticleSortingBar from "./components/ArticleSortingBar";
+import GroupArticleCard from "./components/GroupArticleCard";
 import ErrorTopicPage from "../ErrorPages/ErrorTopicPage";
+import {MagnifyingGlass} from 'react-loader-spinner'
 
 
 export default function Topic() {
@@ -59,15 +60,28 @@ export default function Topic() {
         <>
         {
             isLoading ? 
-            (<p>LOADING............</p>)
-            : ''
-        }
-        <ArticleSortingBar
+            <div className="loadingIndicatorWrapper">
+                <MagnifyingGlass
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="MagnifyingGlass-loading"
+                wrapperClass="MagnifyingGlass-wrapper"
+                wrapperClassName='loadingIndicator'
+                glassColor = 'white'
+                color = 'red'
+                />
+            </div>
+            : <>
+            <ArticleSortingBar
             setSortBy={setSortBy}
             setOrderBy={setOrderBy}/>
-        <div className="displayArticlesByTopics">
-            <GroupArticleCard articlesToDisplay={articlesToDisplay}/>
-        </div>
+            <div className="displayArticlesByTopics">
+                <GroupArticleCard articlesToDisplay={articlesToDisplay}/>
+            </div>
+        </>
+        }
+        
         </>
     )
 }

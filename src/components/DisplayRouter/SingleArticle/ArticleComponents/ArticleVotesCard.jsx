@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { patchCommentByVote } from "../../../../lib/axios";
+import { patchArticleByVote } from "../../../../lib/axios";
+import { AiOutlineDislike,AiOutlineLike,AiFillLike,AiFillDislike } from 'react-icons/ai'
 
-export default function CommentsVotesCard({votes, comment_id}) {
+export default function ArticleVotesCard({votes, article_id}) {
+    
     const [voteCount, setVoteCount] = useState(votes)
     const [isUpVoted, setIsUpVoted] = useState(false);
     const [isDownVoted, setIsDownVoted] = useState(false);
+
     useEffect(() => {
     }, [voteCount])
 
@@ -22,7 +25,7 @@ export default function CommentsVotesCard({votes, comment_id}) {
       isUpVoted
         ? (updatedVoteCount--, setIsUpVoted(() => false), (plus = false))
         : (updatedVoteCount++, setIsUpVoted(() => true), (plus = true));
-      patchCommentByVote(comment_id, plus)
+      patchArticleByVote(article_id, plus)
       .then(() => {
         setVoteCount(() => updatedVoteCount)
       })
@@ -34,7 +37,7 @@ export default function CommentsVotesCard({votes, comment_id}) {
     function upVoteFromDownVote() {
       let updatedVoteCount = voteCount;
       updatedVoteCount += 2;
-      patchCommentByVote(comment_id, true, true)
+      patchArticleByVote(article_id, true, true)
       .then(() => {
         setIsDownVoted(() => false);
         setIsUpVoted(() => true);
@@ -59,7 +62,7 @@ export default function CommentsVotesCard({votes, comment_id}) {
       isDownVoted
       ? (updatedVoteCount++, setIsDownVoted(() => false), (minus = false))
       : (updatedVoteCount--, setIsDownVoted(() => true), (minus = true));
-      patchCommentByVote(comment_id, !minus)
+      patchArticleByVote(article_id, !minus)
       .then(() => {
         setVoteCount(() => updatedVoteCount)
       })
@@ -71,7 +74,7 @@ export default function CommentsVotesCard({votes, comment_id}) {
     function downVoteFromUpVote() {
       let updatedVoteCount = voteCount;
       updatedVoteCount -= 2;
-      patchCommentByVote(comment_id, false, true)
+      patchArticleByVote(article_id, false, true)
       .then(() => {
         setIsDownVoted(() => true)
         setIsUpVoted(() => false)
@@ -83,22 +86,28 @@ export default function CommentsVotesCard({votes, comment_id}) {
     }
 
     return (
-        <span className="commentVotes">        
-        <button
-          className={`upVoteBtn ${isUpVoted ? "active" : ""}`}
-          onClick={() => handleUpVote()}
-        >
-          ↑
-        </button>
+        <span className="articleVotes">
+        {
+          isUpVoted ? (
+            <AiFillLike className='upVoteBtn--filled'
+            onClick={() => handleUpVote()}/>
+          ) : (
+            <AiOutlineLike className='upVoteBtn'
+            onClick={() => handleUpVote()}/>
+          )
+        }
         <div className="voteCount">
           {voteCount}
         </div>
-        <button
-          className={`downVoteBtn ${isDownVoted ? "active" : ""}`}
-          onClick={() => handleDownVote()}
-        >
-          ↓
-        </button>
+        {
+          isDownVoted ? (
+            <AiFillDislike className='downVoteBtn--filled'
+            onClick={() => handleDownVote()}/>
+          ) : (
+            <AiOutlineDislike className='downVoteBtn'
+            onClick={() => handleDownVote()}/>
+          )
+        }
       </span>
     )
 }

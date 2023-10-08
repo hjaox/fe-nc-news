@@ -1,459 +1,670 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
 }
 
-/* @media screen and (max-width: 428px) { */
-  body {
-    display: flex;
-    justify-content: center;
-  }
+#root {
+  background-color: white;
+  display: grid;
+  grid-template-areas:
+    'header topicsBarWrapper customSearchBar settingsWrapper'
+    'displayRouter displayRouter displayRouter displayRouter';
+  grid-template-columns: 1.5fr 2fr 3fr 2fr;
+  position: relative;
+}
 
+.header {
+  background-color: white;
+  grid-area: header;
+  padding-left: 5%;
+  width: auto;
+  white-space: nowrap;
+  color: red;
+  position: sticky;
+  top: 0px;
+}
+
+.header h1 {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.topicsBarWrapper {
+  grid-area: topicsBarWrapper;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: sticky;
+  top: 0px;
+  background-color: white;
+}
+
+.topicsBar {
+  grid-area: topicsBar;
+  display: inline-block;
+  align-items: center;
+  color: black;
+  position: relative;
+  white-space: nowrap;
+  width: 60%;
+  border: 1px solid;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  height: fit-content;
+}
+
+.topicsBar--expanded {
+  grid-area: topicsBar;
+  display: inline-block;
+  align-items: left;
+  color: black;
+  position: relative;
+  margin: auto;
+  white-space: nowrap;
+  width: 60%;
+  border: 1px solid;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+  cursor: pointer;
+  border-radius: 0.3rem 0.3rem 0 0;
+}
+
+.topicsBar__dropdown {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5%;
+  align-items: center;
+}
+
+.topicsBar:hover {
+  border-color: black;
+}
+
+.topicsBar__dropdown__menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: -1px;
+  right: -1px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  border-left: 1px solid;
+  border-radius: 0 0 0.3rem 0.3rem;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+  z-index: 1;
+}
+
+.topic__item {
+  padding: 0.3rem 0 0 5%;
+}
+
+.topic__item:hover {
+  background-color: rgb(194, 194, 194);
+}
+
+.customSearchBar {
+  background-color: white;
+  grid-area: customSearchBar;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: sticky;
+  top: 0px;
+}
+
+.customSearchBar .customSearchForm {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.customSearchBar .customSearchForm button {
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.3rem;
+  border: 1px solid;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+.customSearchBar .customSearchForm button:hover {
+  border-color: black;
+}
+
+#searchInput {
+  flex: 1;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 0.3rem;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+}
+
+#searchInput:hover {
+  border-color: blue;
+}
+
+#searchInput:focus {
+  border-color: blue;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.settingsWrapper {
+  grid-area: settingsWrapper;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: sticky;
+  top: 0px;
+  background-color: white;
+}
+
+.settings {
+  background-color: white; /*temp*/
+  grid-area: settings;
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: sticky;
+  width: 100%;
+}
+
+.settings__dropdown {
+  display: grid;
+  grid-template-areas:
+  'currentUser settings__dropdown--open settings__dropdown--closed'
+  'settings__dropdown__menu settings__dropdown__menu settings__dropdown__menu';
+  justify-content: right;
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  border: 1px solid;
+  border-radius: 0.3rem;
+  padding-left: 5%;
+  padding-right: 1%;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+}
+
+.settings__dropdown--expanded {
+  display: grid;
+  grid-template-areas:
+  'currentUser settings__dropdown--open settings__dropdown--closed'
+  'settings__dropdown__menu settings__dropdown__menu settings__dropdown__menu';
+  justify-content: right;
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  border: 1px solid;
+  border-bottom-color: white ;
+  border-radius: 0.3rem 0.3rem 0 0;
+  padding-left: 5%;
+  padding-right: 1%;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+}
+
+.settings__dropdown:hover {
+  border-color: black;
+}
+
+.settings__dropdown .currentUser {
+  grid-area: currentUser;
+  margin-right: 1rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.settings__dropdown--expanded .currentUser {
+  grid-area: currentUser;
+  margin-right: 1rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.settings__dropdown--closed {
+  grid-area: settings__dropdown--closed;
+  display: flex;
+  flex-direction: column;
+  height: 1.5rem;
+  width: 1.5rem;
+  justify-content: space-evenly;
+  padding: 10%;
+  cursor: pointer;
+  background-color: transparent;
+  z-index: 10;
+}
+
+.settings__dropdown--open {
+  grid-area: settings__dropdown--open;
+  display: flex;
+  flex-direction: column;
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 10%;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+  z-index: 10;
+}
+
+.settings__dropdown__menu__line--closed {
+  border: 1px solid;
+}
+
+.settings__dropdown__menu__line--open {
+  border: 1px solid;
+  position: absolute;
+  width: 1.5rem;
+}
+
+.slash {
+  transform: rotate(45deg);
+}
+
+.backslash {
+  transform: rotate(-45deg)
+}
+
+.settings__dropdown__menu {
+  position: absolute;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  top: 24px;
+  left: -1px;
+  right: -1px;
+  padding-left: 10%;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  border-radius: 0 0 0.3rem 0.3rem;
+  border-color: rgb(201, 201, 201);
+  background-color: whitesmoke;
+}
+
+.displayRouter {
+  background-color: rgb(230, 230, 230);
+  grid-area: displayRouter;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.articleSortingBar {
+  width: 40rem;
+  padding: 0.1rem 0;
+}
+
+.articleSortingBar .articleSortingBar__dropdown {
+  display: flex;
+  flex-direction: row;
+  gap: 0.1rem;
+}
+
+.articleSortingBar .selectedSortBy {
+  width: 10rem;
+  border: 1px solid;
+  border-color: rgb(201, 201, 201);
+  background-color: white;
+  text-align: center;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.articleSortingBar .selectedSortBy--expanded {
+  width: 10rem;
+  border: 1px solid;
+  border-color: rgb(201, 201, 201);
+  background-color: white;
+  text-align: center;
+  border-radius: 0.3rem 0.3rem 0 0;
+  border-bottom-color: white;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+
+.articleSortingBar .articleSortingBar__order {
+  display: flex;
+  border: 1px solid;
+  border-color: rgb(201, 201, 201);
+  background-color: white;
+  text-align: center;
+  align-items: center;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.articleSortingBar .articleSortingBar__dropdown__menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  left: -1px;
+  right: -1px;
+  justify-content: left;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  border-radius: 0 0 0.3rem 0.3rem;
+  border-color: rgb(201, 201, 201);
+}
+
+.displayArticlesByTopics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  width: 40rem;
+}
+
+
+.displayArticlesByTopics .article {
+  border: 1px solid;
+  display: grid;
+  grid-template-areas:
+  'articleAuthor articleAuthor articleAuthor'
+  'articleTitle  articleTitle  articleTitle '
+  'articleImg articleImg articleImg'
+  'articleVotes articleCommentCount articleDate';
+  padding: 1% 5%;
+  border-radius: 0.3rem;
+  border-color: rgb(201, 201, 201);
+  background-color: white;
+}
+
+.displayArticlesByTopics .article .articleTitle {
+  grid-area: articleTitle;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.displayArticlesByTopics .article .articleImg {
+  grid-area: articleImg;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1% 5%;
+  cursor: pointer;
+}
+
+.displayArticlesByTopics .article .articleAuthor {
+  grid-area: articleAuthor;
+  font-size: 0.6rem;
+  font-weight: normal;
+}
+
+.displayArticlesByTopics .article .articleVotes {
+  grid-area: articleVotes;
+  font-size: 0.8rem;
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.displayArticlesByTopics .article .articleCommentCount {
+  grid-area: articleCommentCount;
+  font-size: 0.8rem;
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.displayArticlesByTopics .article .articleDate {
+  grid-area: articleDate;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.displaySingleArticle {
+  display: flex;
+  flex-direction: column;
+  padding: 1% 25%;
+  gap: 1rem;
+  
+}
+
+.displaySingleArticle .article {
+  display: grid;
+  grid-template-areas:
+  'singleArticleAuthor singleArticleAuthor'
+  'singleArticleTitle singleArticleTitle'
+  'singleArticleImg singleArticleImg'
+  'singleArticleBody singleArticleBody'
+  'singleArticleVotes singleArticleCommentCount';
+  gap: 0.3%;
+  border: 1px solid;
+  background-color: white;
+  border-color: rgb(201, 201, 201);
+  border-radius: 0.3rem;
+  padding: 1% 5%;
+}
+
+.displaySingleArticle .article .articleTitle {
+  grid-area: singleArticleTitle;
+  font-size: 1.1rem;
+}
+
+.displaySingleArticle .article .articleImg {
+  grid-area: singleArticleImg;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.5% 5%
+}
+
+.displaySingleArticle .article .articleAuthor {
+  grid-area: singleArticleAuthor;
+  font-size: 0.6rem;
+  font-weight: normal;
+}
+
+.displaySingleArticle .article .articleBody {
+  grid-area: singleArticleBody;
+  font-size: 0.9rem;
+  padding: 0.5% 3%;
+}
+
+.displaySingleArticle .article .articleCommentCount {
+  grid-area: singleArticleCommentCount;
+  font-size: 0.8rem;
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.displaySingleArticle .article .articleVotes {
+  grid-area: singleArticleVotes;
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.displaySingleArticle .article .upVoteBtn,
+.displaySingleArticle .article .downVoteBtn {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+.displaySingleArticle .article .upVoteBtn:hover,
+.displaySingleArticle .article .downVoteBtn:hover {
+  color: red;
+}
+
+.displaySingleArticle .article .upVoteBtn--filled,
+.displaySingleArticle .article .downVoteBtn--filled {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: red;
+  cursor: pointer;
+}
+
+.displaySingleArticle .commentForm{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  gap: 0.1rem;
+  align-items: center;
+}
+
+.displaySingleArticle .commentFormBody{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 4rem;
+  border: 1px solid;
+  border-color: rgb(201, 201, 201);
+  padding: 1%;
+  border-radius: 0.3rem;
+}
+
+.displaySingleArticle .submitButton {
+  width: 20%;
+  border-color: rgb(201, 201, 201);
+  padding: 0.5%;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.displaySingleArticle .comments {
+  display: flex;
+  gap: 0.3rem;
+  flex-direction: column;
+  padding: 0 3%;
+  scroll-margin-top: 3rem;
+}
+
+.displaySingleArticle .comment {
+  display: grid;
+  grid-template-areas:
+  'commentAuthor commentAuthor'
+  'commentBody commentBody'
+  'commentVotes commentCreatedAt';
+  border: 1px solid;
+  padding: 0.5% 3%;
+  background-color: white;
+  border-color: rgb(201, 201, 201);
+  border-radius: 0.3rem;
+  gap: 0.1rem;
+}
+
+.displaySingleArticle .comment .commentAuthor {
+  grid-area: commentAuthor;
+  font-size: 0.6rem;
+  font-weight: normal;
+}
+
+.displaySingleArticle .comment .commentCreatedAt {
+  grid-area: commentCreatedAt;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.displaySingleArticle .comment .commentBody {
+  grid-area: commentBody;
+  font-size: 0.9rem;
+  padding: 0.5% 3%;
+}
+
+.displaySingleArticle .comment .commentVotes {
+  grid-area: commentVotes;
+  font-size: 0.8rem;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.displaySingleArticle .comment .upVoteBtn,
+.displaySingleArticle .comment .downVoteBtn {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.displaySingleArticle .comment .upVoteBtn:hover,
+.displaySingleArticle .comment .downVoteBtn:hover {
+  color: red;
+}
+
+.displaySingleArticle .comment .upVoteBtn--filled,
+.displaySingleArticle .comment .downVoteBtn--filled {
+  width: 1rem;
+  height: 1rem;
+  color: red;
+  cursor: pointer;
+}
+
+.loadingIndicatorWrapper {
+  width: fit-content;
+  height: 94.5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
   #root {
-    display: grid;
-    width: 100%;
     grid-template-areas:
-    'header settings'
-    'border1 border1'
-    'topicsbar customsearchbar'
-    'border2 border2'
-    'displayrouter displayrouter';
-    grid-template-rows: 2.5rem auto 2.3rem auto;
-    grid-template-columns: 2fr 3fr;
-    background-color: red;
-    position: relative;
+    'header settingsWrapper'
+    'topicsBarWrapper customSearchBar'
+    'displayRouter displayRouter';
+    grid-template-columns: 1fr 1fr;
   }
 
-  /* ------------------------------ header ---------------------------- */
-
-  header {
-    display: flex;
-    color: white;
-    padding-left: 0.5rem;
-    position: sticky;
-    top: 0px;
-    font-size: 0.8rem;
-    align-items: center;
-  }
-
-  /*----------------------------- settings ---------------------------*/
-  .settings {
-    grid-area: settings;
-    display: flex;
-    justify-self: right;
-    color: white;
-  }
-
-  .settings .dropdown {
-    display: grid;
-    grid-template-areas:
-    'currentUser dropdown-toggle' ;
-    gap: 1rem;
-  }
-
-  .settings .dropdown .currentUser {
-    grid-area: currentUser;
-    margin: auto;
-  } 
-
-  .settings .dropdown .dropdown-toggle {
-    grid-area: dropdown-toggle;
-    width: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: .2rem;
-    position: relative;
-    background-color: inherit;
-  }
-
-  .settings .dropdown-toggle .menu-line {
-    border: 1px solid;
-    width: 70%;
-    color: white;
-  }
-
-  .users-dropdown-menu {
-    display: flex;
-    flex-direction: column;
-    background-color: red;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    align-items: center;
-    padding: 1rem;
-    gap: 0.5rem;
-    z-index: 1;
-  }
-
-  .users-dropdown-menu .dropdown-item {
-    color: white;
-    text-decoration: none;
-  }
-
-  .dropdown .users-dropdown-menu {
-    visibility: hidden;
-  }
-
-  .show .users-dropdown-menu {
-    visibility: visible;
-  }
-
-  /* -------------------------------- border ----------------------------- */
-  .border1,
-  .border2{
-    border: 1px solid;
-    border-color: rgb(138, 101, 101);
-  }
-
-  .border1 {
-    grid-area: border1;
-  }
-
-  .border2 {
-    grid-area: border2;
-  }
-
-  /*----------------- topicsbar -------------------*/
-
-  .topicsbar {
-    padding: 0.2rem;
-    grid-area: topicsbar;
-    display: flex;
-    height: 80%;
-    align-self: center;
-  }
-
-  .topicsbar .dropdown-toggle {
-    width: 100%;
-    height: 100%;
-    border-radius: 0.6rem;
-    padding: 0.2rem;
-    background-color: red;
-    color: white;
-    min-width: 7rem;
-    
-  }
-
-  .topics-dropdown-menu {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    z-index: 1;
-    gap: 0.5rem;
-    align-items: center;
-    background-color: red;
-    padding: 1rem;
-    position: absolute;
-  }
-
-  .topics-dropdown-menu .dropdown-item {
-    color: white;
-    text-decoration: none;
-  }
-
-  .dropdown .topics-dropdown-menu {
-    visibility: hidden;
-  }
-
-  .show .topics-dropdown-menu {
-    visibility: visible;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* ------------------------------customSearchForm------------------ */
-  .customsearchbar {
-    grid-area: customsearchbar;
-    display: flex;
-  }
-
-  .customSearchForm {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    justify-content: center;
-  }
-
-  .customSearchForm label {
-    display: inline-block;
-    color: white;
-  }
-
-  .customSearchForm input {
-    width: 20%;
-  }
-
-  /*------------------------------------ displayRouter -------------------*/
-  .displayrouter {
-    grid-area: displayrouter;
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-    padding: 0.1rem 0;
-    background-color: rgb(201, 199, 199);
-  }
-
-   /* -----------articleSortingBar----------- */
-   .articleSortingBar {
-    display: flex;
-    padding-left: 0.5rem;
-  }
-
-  .articleSortingBar .dropdown {
-    width: 20%;
-  }
-
-  .articleSortingBar .dropdown .dropdown-toggle {
-    width: 80%;
-  }
- 
-  .articleSortingBar .sortBy-dropdown-menu {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-  }
-
-  .articleSortingBar button.active {
-    visibility: hidden;
-  }
-
-  .articleSortingBar .order {
-    width: 10%;
-    position: relative;
-  }
-
-  .articleSortingBar .asc,
-  .articleSortingBar .desc {
-    position: absolute;
-    width: 100%;
-  }
-
-  .articleSortingBar .sortingStatus .hidden {
-    visibility: hidden;
-  }
-
-  .dropdown .sortBy-dropdown-menu {
-    visibility: hidden;
-  }
-
-  .show .sortBy-dropdown-menu {
-    visibility: visible;
-  }
-
-  /* ----------------------displayRouter-ArticlesByTopic------------- */
-  .displayArticlesByTopics {
-    width: 100%;
-    gap: 0.5rem;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .displayArticlesByTopics .article {
-    padding: 2%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-template-rows: fit-content 1fr 1fr;
-    grid-template-areas:
-    'articleTitle articleTitle articleImg'
-    'articleAuthor articleAuthor articleAuthor'
-    'articleVotes articleCommentCount articleDate';
-    gap: 0.5rem;
-    background-color: white;
-  }
-
-  .displayArticlesByTopics .articleTitle {
-    font-size: 1rem;
-    grid-area: articleTitle;
-  }
-
-  .displayArticlesByTopics .articleImg {
-    grid-area: articleImg;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .displayArticlesByTopics .articleAuthor {
-    grid-area: articleAuthor;
-    font-size: 0.8rem;
-  }
-
-  .displayArticlesByTopics .articleVotes {
-    grid-area: articleVotes;
-    font-size: 0.8rem;
-  }
-
-  .displayArticlesByTopics .articleCommentCount {
-    grid-area: articleCommentCount;
-    font-size: 0.8rem;
-  }
-
-  .displayArticlesByTopics .articleDate {
-    grid-area: articleDate;
-    font-size: 0.8rem;
-    margin-left: auto;
-  }
-  /*----------------- displayRouter-singleArticle -------------------*/
-
-  .displaySingleArticle {
-    width: 100%;
-    gap: 0.3rem;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .displaySingleArticle .article {
-    padding: 2%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto auto 1rem;
-    grid-template-areas:
-    'articleTitle articleTitle articleTitle'
-    'articleAuthor articleAuthor articleAuthor'
-    'articleImg articleImg articleImg'
-    'articleBody articleBody articleBody'
-    'articleVotes _ articleCommentCount';
-    background-color: white;
-  } 
-
-  .displaySingleArticle .articleTitle {
-    grid-area: articleTitle;
-  }
-
-  .displaySingleArticle .articleImg {
-    grid-area: articleImg;
-    width: 100%;
-    height: 100%;
-    padding: 5%;
-  }
-
-  .displaySingleArticle .articleAuthor {
-    grid-area: articleAuthor
-  }
-
-  .displaySingleArticle .articleVotes {
-    grid-area: articleVotes;
-  }
-
-
-
-  .displaySingleArticle .articleBody {
-    grid-area: articleBody;
-    margin-bottom: 1rem;
-  }
-
-  .displaySingleArticle .articleVotes {
-    display: grid;
-    grid-template-areas:
-    'upVoteBtn voteCount downVoteBtn';
-    grid-column: 1fr 1fr 1fr;
-  }
-
-  .displaySingleArticle .articleCommentCount {
-    margin: auto;
-  }
-
-
-  .displaySingleArticle .upVoteBtn {
-    grid-area: upVoteBtn;
-  }
-
-  .displaySingleArticle .downVoteBtn {
-    grid-area: downVoteBtn;
-  }
-
-  .displaySingleArticle .voteCount {
-    grid-area: voteCount;
-    margin: auto;
-  }
-
-  .displaySingleArticle button.active {
-    background-color: red
-  }
-
-  /* ----------------------------comments---------------------- */
-  .displaySingleArticle .comments {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .displaySingleArticle .commentForm {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-    align-items: center;
+  .topicsBarWrapper {
+    justify-content: left;
+    top: 3rem;
+    padding-left: 5%;
   }
 
-  .displaySingleArticle .commentForm .commentFormBody{
-    min-height: 3rem;
-    width: 100%;
-    border: 1px solid;
+  .topicsBar--expanded {
+    margin: 0;
   }
 
-  .displaySingleArticle .commentForm .submitButton{
-    width: 50%;
-    height: 1.5rem;
-    border-radius: 2rem;
+  .customSearchBar {
+    top: 3rem;
   }
-
-  .displaySingleArticle .comment {
-    display: grid;
-    grid-template-columns: 6rem auto 1fr;
-    grid-template-areas:
-    'commentAuthor commentAuthor commentCreatedAt'
-    'commentBody commentBody commentBody'
-    'commentVotes _ _';
-    gap: 0.5rem;
-    background-color: white;
-    padding: 1%;
-  }
-
-  .displaySingleArticle .comment .commentVotes {
-    grid-area: commentVotes;
-    display: flex;
-  }
-
-  .displaySingleArticle .comment .upVoteBtn,
-  .displaySingleArticle .comment .downVoteBtn,
-  .displaySingleArticle .comment .voteCount {
-    width: 2rem;
-  }
-
-  .displaySingleArticle .comment .voteCount {
-    text-align: center;
-  }
-
-  .displaySingleArticle .articleCommentCount {
-    grid-area: articleCommentCount
-  }
-
-  .displaySingleArticle .comment .commentAuthor {
-    grid-area: commentAuthor;
-  }
-  
-  .displaySingleArticle .comment .commentCreatedAt {
-    grid-area: commentCreatedAt;
-    justify-self: right;
-  }
-  
-  .displaySingleArticle .comment .commentBody {
-    grid-area: commentBody;
-  }
-  
-  
-
-/* } 
-/* end of media screen */
-
-/* @media screen and (min-width: 429px) {
-  body {
-    display: flex;
-    background-color: white
-  }; */
-/* } */ 
-/* ---------------to delete after ------------------------*/
-
+}

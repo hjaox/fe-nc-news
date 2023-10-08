@@ -6,10 +6,3 @@ export function resetCommentForm() {
     })
 }
 
-export function resetCustomSearchForm() {
-    const customSearchFormEle = document.getElementById('customSearchForm')
-    const customSearchInputEle = document.getElementById('searchInput')
-    customSearchFormEle.addEventListener('submit', e => {
-        customSearchInputEle.value = '';
-    })
-}

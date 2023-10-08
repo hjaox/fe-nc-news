@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ArticleVotesCard from "./ArticleVotesCard";
+import { BiCommentDetail } from 'react-icons/bi'
 
 
 export default function SingleArticleCard({ article }) {
@@ -17,8 +18,6 @@ export default function SingleArticleCard({ article }) {
   }, [article]);
 
 
-  console.log('here')
-
   return (
     <div key={articleToDisplay.article_id} className="article">
 
@@ -28,7 +27,7 @@ export default function SingleArticleCard({ article }) {
 
       <img className="articleImg" src={articleToDisplay.article_img_url} alt="article-img" />
 
-      <h5 className="articleAuthor">By: {articleToDisplay.author}</h5>
+      <h5 className="articleAuthor">Posted By: {articleToDisplay.author}</h5>
 
       <p className="articleBody">{articleToDisplay.body}</p>
 
@@ -37,7 +36,9 @@ export default function SingleArticleCard({ article }) {
       votes={articleToDisplay.votes}
       />
 
-      <span className="articleCommentCount">Comment: {articleToDisplay.comment_count}</span>
+      <span className="articleCommentCount">
+        <BiCommentDetail/> {articleToDisplay.comment_count} Comments
+      </span>
 
     </div>
   );
