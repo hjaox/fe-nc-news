@@ -1,4 +1,4 @@
-# NC News (mobile version only. desktop version in progress)
+# NC News (More features soon)
 
 NC (Northcoders) news is a social aggregation, web content rating and discussion website. It has articles which are divided into topics, and each article has a user-curated ratings from upvotes and downvotes using the API. Users can also add comments about an article. See https://nc-news-hjaox.netlify.app/ to see the deployed version.
 
