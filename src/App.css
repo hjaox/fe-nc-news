@@ -447,7 +447,7 @@ input::-webkit-inner-spin-button {
 .displaySingleArticle {
   display: flex;
   flex-direction: column;
-  padding: 1% 25%;
+  padding: 1% 0;
   gap: 1rem;
   
 }
@@ -466,6 +466,7 @@ input::-webkit-inner-spin-button {
   border-color: rgb(201, 201, 201);
   border-radius: 0.3rem;
   padding: 1% 5%;
+  width: 50rem;
 }
 
 .displaySingleArticle .article .articleTitle {
@@ -541,6 +542,7 @@ input::-webkit-inner-spin-button {
   height: fit-content;
   gap: 0.1rem;
   align-items: center;
+  width: 50rem;
 }
 
 .displaySingleArticle .commentFormBody{
@@ -568,6 +570,7 @@ input::-webkit-inner-spin-button {
   flex-direction: column;
   padding: 0 3%;
   scroll-margin-top: 3rem;
+  width: 50rem;
 }
 
 .displaySingleArticle .comment {
@@ -676,10 +679,24 @@ input::-webkit-inner-spin-button {
 
 @media screen and (max-width: 660px) {
   .displayArticlesByTopics {
-    width: 100vw;
+    width: 95vw;
   }
 
   .articleSortingBar {
-    width: 100vw;
+    width: 95vw;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .displaySingleArticle .article {
+    width: 95vw;
+  }
+
+  .displaySingleArticle .commentForm{
+    width: 95vw;
+  }
+
+  .displaySingleArticle .comments {
+    width: 95vw;
   }
 }
