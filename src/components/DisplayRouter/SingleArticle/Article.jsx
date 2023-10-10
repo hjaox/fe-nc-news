@@ -8,6 +8,7 @@ import { UserContext } from '../../../context/User';
 import { postComment } from '../../../lib/axios';
 import { resetCommentForm } from '../../script';
 import ErrorArticlePage from '../ErrorPages/ErrorArticlePage';
+import {MagnifyingGlass} from 'react-loader-spinner'
 
 
 export default function Article() {
@@ -20,6 +21,7 @@ export default function Article() {
     const [isLoading, setIsLoading] = useState(false);
     const [articleExists, setArticleExists] = useState(true);
     const location = useLocation();
+    const [showDelayedText, setShowDelayedText] = useState(false);
     
     useEffect(() => {
         setIsLoading(true)
@@ -30,6 +32,7 @@ export default function Article() {
             setCommentsToDisplay(comments)
             setIsLoading(false);
             resetCommentForm();
+            setShowDelayedText(false)
 
             if(location.hash) {
                 const elem = document.getElementById(location.hash.slice(1))
@@ -72,29 +75,54 @@ export default function Article() {
     function handleCommentFormInput(e) {
         setCommentFormBody(e.target.value)
     }
+
+    function delayedText() {
+        setTimeout(() => {
+            setShowDelayedText(() => true)
+        }, 2000)
+    }
     
     return (
         <div className='displaySingleArticle'>
             {
-                isLoading ? (<p>LOADING...</p>) : ''
+                isLoading ? 
+                <div className="loadingIndicatorWrapper">
+                    {delayedText()}
+                    <MagnifyingGlass
+                    visible={true}
+                    height="80"
+                    width="80"
+                    ariaLabel="MagnifyingGlass-loading"
+                    wrapperClass="MagnifyingGlass-wrapper"
+                    wrapperClassName='loadingIndicator'
+                    glassColor = 'white'
+                    color = 'red'
+                    />
+                    {showDelayedText && (
+                        <p>The first load might take a few seconds. The backend of this app is hosted as a free instance on render.com</p>
+                    )}
+                </div> : 
+                <>
+                <SingleArticleCard article={articleToDisplay}/>
+                <form className='commentForm' id='commentForm' onSubmit={(e) => handleSubmitForm(e)}>
+                    <input type="text" id='commentFormBody' className='commentFormBody' onChange={(e) => handleCommentFormInput(e)} placeholder='Enter your comment....'/>
+                    {isPosting ? (<p>POSTING...</p>) : ''}
+                    <button className='submitButton' form='commentForm' type='submit'>Submit</button>
+                </form>
+                <div className='comments' id='comments'>
+                    {
+                        commentsToDisplay.map(comment => {
+                            return (
+                                <div key={comment.comment_id} className="comment">
+                                    <CommentCard comment={comment}/>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                </>
             }
-            <SingleArticleCard article={articleToDisplay}/>
-            <form className='commentForm' id='commentForm' onSubmit={(e) => handleSubmitForm(e)}>
-                <input type="text" id='commentFormBody' className='commentFormBody' onChange={(e) => handleCommentFormInput(e)} placeholder='Enter your comment....'/>
-                {isPosting ? (<p>POSTING...</p>) : ''}
-                <button className='submitButton' form='commentForm' type='submit'>Submit</button>
-            </form>
-            <div className='comments' id='comments'>
-                {
-                    commentsToDisplay.map(comment => {
-                        return (
-                            <div key={comment.comment_id} className="comment">
-                                <CommentCard comment={comment}/>
-                            </div>
-                        )
-                    })
-                }
-            </div>
+            
         </div>
     )
 }

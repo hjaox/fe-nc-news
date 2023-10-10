@@ -12,15 +12,17 @@ export default function Topic() {
     const [articlesToDisplay, setArticlesToDisplay] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [sortBy, setSortBy] = useState('Date');
-    const [orderByAsc, setOrderByAsc] = useState(false)
-    const [topicExists, setTopicExists] = useState(true)
+    const [orderByAsc, setOrderByAsc] = useState(false);
+    const [topicExists, setTopicExists] = useState(true);
+    const [showDelayedText, setShowDelayedText] = useState(false);
     
     useEffect(() => {
-        setIsLoading(true)
+        setIsLoading(true);
         getAllArticles(selectedTopic, checkSortVal(sortBy), orderByAsc ? 'asc' : 'desc')
         .then(articles => {
-            setArticlesToDisplay(articles)
-            setIsLoading(false)
+            setArticlesToDisplay(articles);
+            setIsLoading(false);
+            setShowDelayedText (false)
         })
         .catch(err => {
             if(err.code === 'ERR_NETWORK') {
@@ -32,7 +34,6 @@ export default function Topic() {
                 checkTopicIfExists(selectedTopic)
                 .then(bool => {
                     setTopicExists(bool)
-                    console.log()
                     setIsLoading(false)
                 })
             }
@@ -54,6 +55,13 @@ export default function Topic() {
         if(val === 'Most Comments') sortBy = 'count';
         if(val === 'Votes') sortBy = 'votes';
         return sortBy
+    
+    }
+
+    function delayedText() {
+        setTimeout(() => {
+            setShowDelayedText(() => true)
+        }, 2000)
     }
 
     if(!topicExists) {
@@ -69,6 +77,7 @@ export default function Topic() {
         {
             isLoading ? 
             <div className="loadingIndicatorWrapper">
+                {delayedText()}
                 <MagnifyingGlass
                 visible={true}
                 height="80"
@@ -79,6 +88,9 @@ export default function Topic() {
                 glassColor = 'white'
                 color = 'red'
                 />
+                {showDelayedText && (
+                    <p>The first load might take a few seconds. The backend of this app is hosted as a free instance on render.com</p>
+                )}
             </div>
             : <>
             <ArticleSortingBar
