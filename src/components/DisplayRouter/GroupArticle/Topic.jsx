@@ -8,16 +8,16 @@ import {MagnifyingGlass} from 'react-loader-spinner'
 
 
 export default function Topic() {
-    const {selectedTopic} = useParams()
+    const {selectedTopic} = useParams('')
     const [articlesToDisplay, setArticlesToDisplay] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [sortBy, setSortBy] = useState('');
-    const [orderBy, setOrderBy] = useState('')
+    const [sortBy, setSortBy] = useState('Date');
+    const [orderByAsc, setOrderByAsc] = useState(false)
     const [topicExists, setTopicExists] = useState(true)
     
     useEffect(() => {
         setIsLoading(true)
-        getAllArticles(selectedTopic, sortBy, orderBy)
+        getAllArticles(selectedTopic, checkSortVal(sortBy), orderByAsc ? 'asc' : 'desc')
         .then(articles => {
             setArticlesToDisplay(articles)
             setIsLoading(false)
@@ -37,7 +37,7 @@ export default function Topic() {
                 })
             }
         })
-    },[selectedTopic, sortBy, orderBy])
+    },[selectedTopic, sortBy, orderByAsc])
 
     function checkTopicIfExists(topicToCheck) {
         return getAllTopics()
@@ -46,6 +46,14 @@ export default function Topic() {
             .map(topic => topics.slug)
             .includes(topicToCheck)
         })
+    }
+
+    function checkSortVal(val) {
+        let sortBy = '';
+        if(val === 'Date') sortBy = 'created_at';
+        if(val === 'Most Comments') sortBy = 'count';
+        if(val === 'Votes') sortBy = 'votes';
+        return sortBy
     }
 
     if(!topicExists) {
@@ -75,13 +83,14 @@ export default function Topic() {
             : <>
             <ArticleSortingBar
             setSortBy={setSortBy}
-            setOrderBy={setOrderBy}/>
+            sortBy={sortBy}
+            orderByAsc={orderByAsc}
+            setOrderByAsc={setOrderByAsc}/>
             <div className="displayArticlesByTopics">
                 <GroupArticleCard articlesToDisplay={articlesToDisplay}/>
             </div>
         </>
         }
-        
         </>
     )
 }
